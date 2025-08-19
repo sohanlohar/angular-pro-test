@@ -1,0 +1,147 @@
+<div class="container">
+  <mat-spinner class="spinner" *ngIf="!allStatusLoadingState()"></mat-spinner>
+  <div class="container__title-wrapper">
+    <div class="container__title">
+      {{ data?.dashboard?.my_orders }}
+    </div>
+  </div>
+
+  <div class="container-card">
+    <div class="date-range-picker">
+      <form [formGroup]="dateRangePickerForm">
+        <pos-date-range-picker
+          (formChange)="onDateRangePickerFormChange($event)"
+          class="px-3"
+        ></pos-date-range-picker>
+      </form>
+    </div>
+
+    <ng-container>
+      <div class="container__orders">
+        <div class="wrapper-column">
+          <div class="column left">
+            <div class="column-loading-overlay" *ngIf="isLoading">
+              <mat-spinner class="spinner"></mat-spinner>
+            </div>
+            <ng-container>
+              <div class="container__orders-title">
+                {{ data?.dashboard?.my_cod }}
+              </div>
+
+              <!-- COD Collected Card -->
+              <div class="cod-card-container">
+                <pos-cod-order
+                  theme="green"
+                  icon="done"
+                  [label]="data?.dashboard?.collected"
+                  [status]="'delivered'"
+                  [price]="($total_cod | async) ?? 0"
+                ></pos-cod-order>
+              </div>
+
+              <!-- COD Pending Card -->
+              <div class="cod-card-container">
+                <pos-cod-order
+                  theme="blue"
+                  icon="more_horiz"
+                  [label]="data?.dashboard?.pending_collection"
+                  [status]="'live'"
+                  [price]="($total_pending | async) ?? 0"
+                >
+                </pos-cod-order>
+              </div>
+
+              <!-- COD Failed Card -->
+              <div class="cod-card-container">
+                <pos-cod-order
+                  theme="red"
+                  icon="error_outline"
+                  [label]="data?.dashboard?.failed_collect"
+                  [status]="'failed'"
+                  [price]="($total_failed | async) ?? 0"
+                >
+                </pos-cod-order>
+              </div>
+            </ng-container>
+          </div>
+          <div class="column cod">
+            <div class="payment-method">{{data.dashboard.insights.payment_method}}</div>
+
+            <!-- Chart Content -->
+            <div
+              class="chart-table-container"
+              [class.empty]="isEmptyDoughnutChart"
+            >
+              <div class="column-loading-overlay" *ngIf="isLoading">
+                <mat-spinner class="spinner"></mat-spinner>
+              </div>
+              <div class="chart-section">
+                <canvas
+                  baseChart
+                  height="260"
+                  width="260"
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"
+                  [options]="doughnutChartOptions"
+                  [plugins]="doughnutChartPlugins"
+                  [legend]="doughnutChartLegend"
+                  [colors]="doughnutColors"
+                  *ngIf="!isEmptyDoughnutChart"
+                >
+                </canvas>
+                <div class="no-data" *ngIf="isEmptyDoughnutChart">
+                  {{data.dashboard.insights.no_data}}
+                </div>
+                <div class="no-data table" *ngIf="isEmptyDoughnutChart">
+                  <p>{{data.dashboard.insights.unvailable}}</p>
+                </div>
+              </div>
+              <div class="table-section" *ngIf="!isEmptyDoughnutChart">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>{{ data.dashboard.insights.delivery_type }}</th>
+                      <th>{{ data.dashboard.insights.order_count }}</th>
+                      <th>{{ data.dashboard.insights.percentage }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="!isEmptyDoughnutChart">
+                      <tr *ngFor="let element of dataSource2">
+                        <td>
+                          <div class="box-color">
+                            <div
+                              [ngStyle]="{
+                                background: element.color,
+                                width: '20px',
+                                height: '20px',
+                                borderRadius: '5px',
+                                marginRight: '5px'
+                              }"
+                            ></div>
+                            {{ element.name }}
+                          </div>
+                        </td>
+
+                        <td>{{ element.value }}</td>
+                        <td>{{ element.percentage }}%</td>
+                      </tr>
+                    </ng-container>
+                    <ng-container *ngIf="isEmptyDoughnutChart">
+                      <tr class="no-available">
+                        <td colspan="3" class="no-data-text">
+                          {{ data.dashboard.insights.unvailable }}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="pickup__form">
+  <span class="pickup__form-mat-dialog-title">{{languageData.pickup_request}}</span>
+  <span class="mat-header-close" (click)="dialogRef.close()">
+    <mat-icon class="close" svgIcon="close_icon"></mat-icon>
+  </span>
+
+  <mat-dialog-content>
+    <div class="pickup__form-container">
+      <span class="note">{{languageData.date_note}}</span>
+
+      <div class="date">
+        <mat-form-field class="date-input" appearance="standard">
+          <label>{{languageData.select_date}}</label>
+            <input
+              readonly
+              matInput
+              [min]="minDate"
+              [max]="maxDate"
+              [matDatepicker]="picker"
+              [formControl]="releaseDate"
+              placeholder="Select a Date"
+              (dateChange)="dateEvent($event)"
+              (click)="picker.open()"/>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <button (click)="picker.open(); editDate();"> <svg viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor" focusable="false" class="mat-datepicker-toggle-default-icon ng-star-inserted"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"></path></svg>
+            </button>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-dialog-actions>
+          <button mat-raised-button color="primary" (click)="requestPickUp()">
+            {{languageData.request_pickup}}
+          </button>
+        </mat-dialog-actions>
+      </div>
+      <div class="max-date-note" style="font-size:12px;color:#888;">
+  {{languageData.max_selectable_date}} {{ maxDate | date:'dd MMM yyyy' }}
+</div>
+      <small *ngIf="showError">{{ errorMessage }}</small>
+
+    </div>
+
+  </mat-dialog-content>
+
+
+</div>
