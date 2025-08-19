@@ -298,13 +298,12 @@
     margin-bottom: 1rem !important;
   }
 
-  .container.rto {
+  .container {
     padding: 1rem !important;
     gap: 1rem !important;
-    box-shadow: none;
 
     &.rto {
-      // padding: 0.5rem !important;
+      padding: 0.5rem !important;
     }
   }
 
@@ -312,11 +311,9 @@
     .rto-cards {
       flex-direction: column !important;
       gap: 0.75rem !important;
-      align-items: normal;
 
       .rto-card {
         width: 100% !important;
-        padding: 15px;
       }
     }
   }
@@ -360,7 +357,7 @@
   }
 
   .no-data {
-    background-color: #fafafa !important;
+    background-color: #fafafa!important;
   }
 }
 
@@ -1291,11 +1288,11 @@ a.download-report-button {
   }
 
   .container {
-    // padding: 0.75rem !important;
+    padding: 0.75rem !important;
     gap: 0.75rem !important;
 
     &.rto {
-      // padding: 0.5rem !important;
+      padding: 0.5rem !important;
     }
   }
 
