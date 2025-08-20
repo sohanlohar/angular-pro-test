@@ -111,11 +111,16 @@
           <button
             (click)="onDownloadAsAndPrintButton(detail?.id)"
             target="_blank"
-            [disabled]="activeTabRoute === 'request-pickup'"
             color="primary"
             mat-flat-button
+            class="print-shipment-btn"
           >
-            {{ languageData.print }}
+            <ng-container *ngIf="!isMobile(); else printOnly">
+              {{ languageData.print }}
+            </ng-container>
+            <ng-template #printOnly>
+              <mat-icon>print</mat-icon>
+            </ng-template>
           </button>
           <button
             (click)="cancelShipment(detail?.tracking_id)"
@@ -125,7 +130,14 @@
             mat-flat-button
             class="cancel-shipment-btn"
           >
-            {{ languageData.delete_shipment }}
+            <ng-container *ngIf="!isMobile(); else deleteOnly">
+              {{ languageData.delete_shipment }}
+            </ng-container>
+            <ng-template #deleteOnly>
+              <mat-icon class="material-symbols-outlined action-icon">
+                delete
+              </mat-icon>
+            </ng-template>
           </button>
           <!-- <a [href]="trackingUrl + detail?.tracking_id" target="_blank" color="primary" mat-flat-button>{{languageData.track_order}}</a> -->
         </div>

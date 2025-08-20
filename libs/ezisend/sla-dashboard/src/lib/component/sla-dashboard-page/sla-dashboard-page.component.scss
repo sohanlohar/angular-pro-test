@@ -298,12 +298,13 @@
     margin-bottom: 1rem !important;
   }
 
-  .container {
-    padding: 1rem !important;
+  .container.rto {
+    padding: 0 1rem !important;
     gap: 1rem !important;
+    box-shadow: none;
 
     &.rto {
-      padding: 0.5rem !important;
+      // padding: 0.5rem !important;
     }
   }
 
@@ -311,9 +312,11 @@
     .rto-cards {
       flex-direction: column !important;
       gap: 0.75rem !important;
+      align-items: normal;
 
       .rto-card {
         width: 100% !important;
+        padding: 15px;
       }
     }
   }
@@ -357,7 +360,7 @@
   }
 
   .no-data {
-    background-color: #fafafa!important;
+    background-color: #fafafa !important;
   }
 }
 
@@ -1283,16 +1286,16 @@ a.download-report-button {
   }
 
   .container-card {
-    padding: 1rem !important;
-    gap: 1rem !important;
+    // padding: 1rem !important;
+    // gap: 0.5rem !important;
   }
 
   .container {
-    padding: 0.75rem !important;
+    // padding: 0.75rem !important;
     gap: 0.75rem !important;
 
     &.rto {
-      padding: 0.5rem !important;
+      // padding: 0.5rem !important;
     }
   }
 
@@ -1300,7 +1303,7 @@ a.download-report-button {
     gap: 1rem !important;
 
     .header-filter {
-      gap: 0.75rem !important;
+      // gap: 0.75rem !important;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -1364,10 +1367,10 @@ a.download-report-button {
   }
 
   .chart-card {
-    min-height: 200px !important;
+    // min-height: 200px !important;
 
     canvas {
-      height: 200px !important;
+      // height: 200px !important;
     }
   }
 

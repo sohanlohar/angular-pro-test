@@ -208,6 +208,22 @@ export class LiveShipmentsComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeChip(type: string) {
+    switch (type) {
+      case 'date':
+        this.start_date = '';
+        this.end_date = '';
+        break;
+      case 'status':
+        this.order_status = '';
+        break;
+      case 'cod':
+        this.cod_type = '';
+        break;
+    }
+    this.fetchShipments();
+  }
+
   onActionEvent(event: { data: IDataShipment; actionType: string }) {
     this.selectedSingleData = event.data;
     const urlPathDetails =
@@ -371,7 +387,8 @@ export class LiveShipmentsComponent implements OnInit, OnDestroy {
           event: 'view_order_details',
           event_category: 'SendParcel Pro - My Shipments - All',
           event_action: 'View Order Details',
-          event_label: 'Order Details - ' + event.data.tracking_details.tracking_id,
+          event_label:
+            'Order Details - ' + event.data.tracking_details.tracking_id,
           tracking_number: event.data.tracking_details.tracking_id,
           order_date: moment(event.data.created_date).format('DD MMM YYYY'),
           order_time: moment(event.data.created_date).format('h:mm:ss A'),
@@ -380,7 +397,8 @@ export class LiveShipmentsComponent implements OnInit, OnDestroy {
           parcel_width: event.data.pickup_details.width || null,
           parcel_height: event.data.pickup_details.height || null,
           parcel_length: event.data.pickup_details.length || null,
-          volumetric_weight: event.data.pickup_details.volumetric_weight || null,
+          volumetric_weight:
+            event.data.pickup_details.volumetric_weight || null,
           item_description: event.data.pickup_details.item_description || null,
           sum_insured_amount: event.data.sum_insured || null,
           premium_amount: event.data.premium_amount || null,

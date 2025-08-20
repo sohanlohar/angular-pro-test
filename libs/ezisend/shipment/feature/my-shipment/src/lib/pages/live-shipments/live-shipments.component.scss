@@ -228,7 +228,7 @@
 }
 
 .custom-chip {
-  display: inline-block;
+  display: inline-flex;
   padding: 5px 12px;
   font-size: 13px;
   border-radius: 16px;
@@ -237,6 +237,8 @@
   font-weight: 500;
   margin: 4px;
   white-space: nowrap;
+  align-items: center;
+  gap: 5px;
 }
 
 .filter-btn {

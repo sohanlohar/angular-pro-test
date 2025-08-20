@@ -229,6 +229,7 @@
     // width: 95%;
     // margin-left: 7%;
     position: sticky;
+    margin-bottom: 0 !important;
     button {
       // width: 88%;
       // width: 97%;
@@ -240,6 +241,7 @@
       line-height: 21px;
       border-radius: 5px;
       border: 1px solid;
+      margin-bottom: 0 !important;
     }
   }
   .pickup_list.fixed-height {

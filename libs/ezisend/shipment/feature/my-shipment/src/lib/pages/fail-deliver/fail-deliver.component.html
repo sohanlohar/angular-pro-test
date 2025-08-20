@@ -36,8 +36,8 @@
   </button>
 
   <div>
-    <span *ngIf="start_date && end_date" class="custom-chip">{{start_date | date}}-{{end_date| date}}</span>
-    <span *ngIf="cod_type" class="custom-chip">{{cod_type}}</span>
+    <span *ngIf="start_date && end_date" class="custom-chip"><mat-icon class="remove-icon" (click)="removeChip('date')">close</mat-icon>{{start_date | date}}-{{end_date| date}}</span>
+    <span *ngIf="cod_type" class="custom-chip"><mat-icon class="remove-icon" (click)="removeChip('cod')">close</mat-icon>{{cod_type}}</span>
   </div>
 
 

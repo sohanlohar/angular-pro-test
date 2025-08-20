@@ -6,7 +6,7 @@
     color: v.$teritary_color;
     font-size: v.$font_size_m;
     font-weight: v.$font-weight-medium;
-    padding: 0.4rem 0.4rem;
+    padding: 0.4rem 0 0.4rem 0rem;
     margin-bottom: 10px;
   }
 
@@ -60,17 +60,17 @@
 }
 @media screen and (max-width: 768px) {
   .dashboard-wrapper {
-    padding: 0 0.5rem;
+    // padding: 0 0.5rem;
     .create-order-tile {
       margin-bottom: 2.5rem !important;
     }
   }
   .summaryshipment {
     .container__title-wrapper {
-      padding: 0 0.5rem;
+      // padding: 0 0.5rem;
     }
     .date-range-picker {
-      padding: 0 0.5rem;
+      // padding: 0 0.5rem;
     }
   }
   .insights {
@@ -78,14 +78,20 @@
       padding: 0 0.5rem;
     }
     .flex-container {
-      padding: 0 0.5rem;
+      // padding: 0 0.5rem;
     }
     .header-filter {
       align-items: flex-start !important;
-      padding: 0 0.5rem;
+      padding: 0;
     }
     .no-data {
       background-color: #fff !important;
     }
+    .container-card {
+      padding: 2rem 1rem !important;
+    }
+  }
+  .summaryshipment {
+    margin-bottom: 2.5rem;
   }
 }

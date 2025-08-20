@@ -134,6 +134,16 @@ export class DeliveredComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeChip(type: 'date' | 'cod') {
+    if (type === 'date') {
+      this.start_date = '';
+      this.end_date = '';
+    } else if (type === 'cod') {
+      this.cod_type = '';
+    }
+    this.fetchShipments();
+  }
+
   ngOnInit(): void {
     //For API
     this.end_date = moment()
@@ -322,7 +332,8 @@ export class DeliveredComponent implements OnInit, OnDestroy {
           event: 'view_order_details',
           event_category: 'SendParcel Pro - My Shipments - All',
           event_action: 'View Order Details',
-          event_label: 'Order Details - ' + event.data.tracking_details.tracking_id,
+          event_label:
+            'Order Details - ' + event.data.tracking_details.tracking_id,
           // tracking_number: event.data.tracking_details.tracking_id, removed as per google Analytics slide #51
           order_date: moment(event.data.created_date).format('DD MMM YYYY'),
           order_time: moment(event.data.created_date).format('h:mm:ss A'),
@@ -331,7 +342,8 @@ export class DeliveredComponent implements OnInit, OnDestroy {
           parcel_width: event.data.pickup_details.width || null,
           parcel_height: event.data.pickup_details.height || null,
           parcel_length: event.data.pickup_details.length || null,
-          volumetric_weight: event.data.pickup_details.volumetric_weight || null,
+          volumetric_weight:
+            event.data.pickup_details.volumetric_weight || null,
           item_description: event.data.pickup_details.item_description || null,
           sum_insured_amount: event.data.sum_insured || null,
           premium_amount: event.data.premium_amount || null,
@@ -436,7 +448,8 @@ export class DeliveredComponent implements OnInit, OnDestroy {
           event: 'view_order_details',
           event_category: 'SendParcel Pro - My Shipments - ' + tabValue,
           event_action: 'View Order Details',
-          event_label: 'Order Details - ' + event.data.tracking_details.tracking_id,
+          event_label:
+            'Order Details - ' + event.data.tracking_details.tracking_id,
           tracking_number: event.data.tracking_details.tracking_id,
           order_date: moment(event.data.created_date).format('DD MMM YYYY'),
           order_time: moment(event.data.created_date).format('h:mm:ss A'),
@@ -445,7 +458,8 @@ export class DeliveredComponent implements OnInit, OnDestroy {
           parcel_width: event.data.pickup_details.width || null,
           parcel_height: event.data.pickup_details.height || null,
           parcel_length: event.data.pickup_details.length || null,
-          volumetric_weight: event.data.pickup_details.volumetric_weight || null,
+          volumetric_weight:
+            event.data.pickup_details.volumetric_weight || null,
           item_description: event.data.pickup_details.item_description || null,
           sum_insured_amount: event.data.sum_insured || null,
           premium_amount: event.data.premium_amount || null,

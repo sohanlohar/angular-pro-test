@@ -556,13 +556,25 @@
     display: grid;
     grid-gap: 0rem 0.5rem;
     margin-bottom: 1rem;
-    background: #f7fbff;
+    // background: #f7fbff;
     border-radius: 0.5rem;
     // padding: 0 0.5rem;
 
     .delete_custom {
       grid-area: deCu;
       place-items: center;
+      align-items: flex-end;
+      button {
+        padding: 8px 20px;
+        background-color: white;
+        color: #f86262;
+        cursor: pointer;
+        border: 2px solid #f86262;
+        border-radius: 5px;
+        width: fit-content;
+        padding: 0 20px;
+        box-shadow: none;
+      }
     }
 
     .parcel_type {
@@ -683,10 +695,10 @@
       .weight {
         grid-area: auto;
       }
-      .delete_custom {
-        grid-area: auto;
-        place-items: inherit;
-      }
+      // .delete_custom {
+      //   grid-area: auto;
+      //   place-items: inherit;
+      // }
     }
   }
   .parcel-container1 {

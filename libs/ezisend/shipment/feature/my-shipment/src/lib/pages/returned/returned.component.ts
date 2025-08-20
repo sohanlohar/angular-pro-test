@@ -1,8 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IResponse } from '@pos/ezisend/shared/data-access/models';
@@ -105,6 +101,16 @@ export class ReturnedComponent implements OnInit {
       this.dropdownOptions[0].viewValue = this.languageData.all;
       this.dropdownOptions[2].viewValue = this.languageData.non_cod;
     });
+  }
+
+  removeChip(type: 'date' | 'cod') {
+    if (type === 'date') {
+      this.start_date = '';
+      this.end_date = '';
+    } else if (type === 'cod') {
+      this.cod_type = '';
+    }
+    this.fetchShipments();
   }
 
   ngOnInit(): void {

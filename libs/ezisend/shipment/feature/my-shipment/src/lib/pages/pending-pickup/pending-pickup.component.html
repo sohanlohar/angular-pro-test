@@ -39,8 +39,8 @@
   </button>
 
   <div>
-    <span *ngIf="start_date && end_date" class="custom-chip">{{start_date | date}}-{{end_date| date}}</span>
-    <span *ngIf="pickup_status" class="custom-chip">{{pickup_status}}</span>
+    <span *ngIf="start_date && end_date" class="custom-chip"><mat-icon class="remove-icon" (click)="removeChip('date')">close</mat-icon>{{start_date | date}}-{{end_date| date}}</span>
+    <span *ngIf="pickup_status" class="custom-chip"><mat-icon class="remove-icon" (click)="removeChip('pickup_status')">close</mat-icon>{{pickup_status}}</span>
   </div>
 
 

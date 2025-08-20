@@ -107,6 +107,16 @@ export class FailDeliverComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeChip(type: 'date' | 'cod') {
+    if (type === 'date') {
+      this.start_date = '';
+      this.end_date = '';
+    } else if (type === 'cod') {
+      this.cod_type = '';
+    }
+    this.fetchShipments();
+  }
+
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.current_tab = params['t'];
@@ -180,7 +190,8 @@ export class FailDeliverComponent implements OnInit, OnDestroy {
           event: 'track_order',
           event_category: 'SendParcel Pro - My Shipments - Failed Deliveries',
           event_action: 'Track Order',
-          event_label: 'Track Order - ' + event.data.tracking_details.tracking_id,
+          event_label:
+            'Track Order - ' + event.data.tracking_details.tracking_id,
         };
         this._commonService.googleEventPush(eventDetails);
         window.open(urlDetails);
@@ -193,7 +204,8 @@ export class FailDeliverComponent implements OnInit, OnDestroy {
           event: 'view_order_details',
           event_category: 'SendParcel Pro - My Shipments - Failed Deliveries',
           event_action: 'View Order Details',
-          event_label: 'Order Details - ' + event.data.tracking_details.tracking_id,
+          event_label:
+            'Order Details - ' + event.data.tracking_details.tracking_id,
           tracking_number: event.data.tracking_details.tracking_id,
           order_date: moment(event.data.created_date).format('DD MMM YYYY'),
           order_time: moment(event.data.created_date).format('h:mm:ss A'),
@@ -202,7 +214,8 @@ export class FailDeliverComponent implements OnInit, OnDestroy {
           parcel_width: event.data.pickup_details.width || null,
           parcel_height: event.data.pickup_details.height || null,
           parcel_length: event.data.pickup_details.length || null,
-          volumetric_weight: event.data.pickup_details.volumetric_weight || null,
+          volumetric_weight:
+            event.data.pickup_details.volumetric_weight || null,
           item_description: event.data.pickup_details.item_description || null,
           sum_insured_amount: event.data.sum_insured || null,
           premium_amount: event.data.premium_amount || null,

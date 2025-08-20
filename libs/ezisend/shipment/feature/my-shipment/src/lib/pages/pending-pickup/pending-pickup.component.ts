@@ -158,6 +158,16 @@ export class PendingPickupComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeChip(type: 'date' | 'pickup_status') {
+    if (type === 'date') {
+      this.start_date = '';
+      this.end_date = '';
+    } else if (type === 'pickup_status') {
+      this.pickup_status = '';
+    }
+    this.fetchShipments();
+  }
+
   ngOnInit(): void {
     this.end_date = moment()
       .add(30, 'days')
