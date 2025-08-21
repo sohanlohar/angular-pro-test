@@ -1313,13 +1313,18 @@ a.download-report-button {
         align-items: flex-start !important;
         justify-content: flex-start !important;
         flex-direction: column;
-
-        label {
-          margin-top: -20px;
-          font-size: 12px !important;
-          text-align: left !important;
-          align-self: flex-start !important;
-          margin-bottom: 0 !important;
+        width: 100%;
+        .date-picker-form {
+          width: 100% !important;
+        }
+        ::ng-deep .mat-form-field-wrapper {
+          padding-bottom: 0 !important;
+        }
+      }
+      .button-download {
+        width: 100%;
+        button {
+          width: 100%;
         }
       }
     }
@@ -1327,7 +1332,7 @@ a.download-report-button {
 
   .rto-layout {
     .rto-cards {
-      gap: 0.5rem !important;
+      // gap: 0.5rem !important;
 
       .rto-card {
         padding: 16px !important;
@@ -1384,5 +1389,23 @@ a.download-report-button {
 @media screen and (max-width: 1024px) {
   .no-data-dex {
     flex-direction: column;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header-sla {
+    .header-filter {
+      flex-direction: column;
+
+      .date-picker-container {
+        gap: 0.5rem !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        // flex-direction: column;
+
+        label {
+          font-size: 12px !important;
+        }
+      }
+    }
   }
 }

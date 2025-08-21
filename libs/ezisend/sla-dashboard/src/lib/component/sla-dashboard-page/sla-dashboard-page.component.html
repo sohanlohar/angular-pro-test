@@ -18,12 +18,7 @@
             mat-flat-button
             color="primary"
             [matMenuTriggerFor]="headerMenu"
-            *ngIf="
-              !isStatusEmpty ||
-              !isEmptyType ||
-              !isEmptyDex ||
-              shipmentData.length > 0
-            "
+           
           >
             {{ languageData.download_all }}
             <mat-icon class="material-icon-outlined" mat-icon-button>

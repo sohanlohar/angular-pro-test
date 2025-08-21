@@ -122,6 +122,10 @@
     //     grid-area: deL;
     //   }
     // }
+    .add_btn {
+      border: 0;
+      padding: 0;
+    }
   }
 
   .dimensionGuide {
@@ -438,7 +442,7 @@
 // ================
 /* Main container adaptations */
 .child_accordions,
-.customs_container{
+.customs_container {
   padding: 1rem 0 0 0;
   .mat-expansion-panel {
     max-width: 100%;
@@ -552,15 +556,15 @@
   button {
     padding: 8px 20px;
     background-color: white;
-    color: #F86262;
+    color: #f86262;
     cursor: pointer;
-    border: 2px solid #F86262;
+    border: 2px solid #f86262;
     border-radius: 5px;
   }
-  button:disabled{
-      border: 2px solid #696969;
-      border-radius: 5px;
-      color: #696969;
+  button:disabled {
+    border: 2px solid #696969;
+    border-radius: 5px;
+    color: #696969;
   }
 }
 

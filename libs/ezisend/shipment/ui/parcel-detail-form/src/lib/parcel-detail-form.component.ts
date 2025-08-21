@@ -2040,6 +2040,6 @@ export class ParcelDetailFormComponent
 
   showMobileTooltip(tooltip: MatTooltip) {
     tooltip.show();
-    setTimeout(() => tooltip.hide(), 3000);
+    setTimeout(() => tooltip.hide(), 5000);
   }
 }

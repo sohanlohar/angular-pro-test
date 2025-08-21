@@ -854,22 +854,14 @@
             [isParcel]="true"
           >
           </pos-country-select>
-
-          <div
-            class="delete_custom"
-            *ngIf="customs_declarations.controls.length > 1"
-          >
+          <div class="delete_custom">
             <button
-              mat-mini-fab
               color="primary"
               type="button"
               [disabled]="isDisable"
               (click)="removeCustom(i)"
             >
               {{ languageForm.delete }}
-              <!-- <mat-icon aria-hidden="false" class="material-icons-outlined">
-                delete
-              </mat-icon> -->
             </button>
           </div>
         </div>
