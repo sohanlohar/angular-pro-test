@@ -82,7 +82,6 @@
         <div
           class="track-order-button-container"
           fxLayout="column"
-          fxLayoutGap="0.5rem"
         >
           <button
             (click)="navigateToReturn()"
@@ -119,7 +118,7 @@
               {{ languageData.print }}
             </ng-container>
             <ng-template #printOnly>
-              <mat-icon>print</mat-icon>
+              <mat-icon fontIcon="print" fontSet="material-icons-outlined">print</mat-icon>
             </ng-template>
           </button>
           <button
@@ -134,7 +133,7 @@
               {{ languageData.delete_shipment }}
             </ng-container>
             <ng-template #deleteOnly>
-              <mat-icon class="material-symbols-outlined action-icon">
+              <mat-icon fontIcon="delete" class="material-symbols-outlined action-icon">
                 delete
               </mat-icon>
             </ng-template>

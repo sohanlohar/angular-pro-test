@@ -38,7 +38,7 @@
 
 .inner-box {
   height: auto;
-  min-height: 8rem;
+  // min-height: 8rem;
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 0.5rem;
@@ -93,5 +93,10 @@
   }
   .summaryshipment {
     margin-bottom: 2.5rem;
+  }
+  .container {
+    .content-container {
+      justify-content: flex-start !important;
+    }
   }
 }

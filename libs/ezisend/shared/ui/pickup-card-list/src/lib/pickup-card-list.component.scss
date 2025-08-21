@@ -230,6 +230,12 @@
     // margin-left: 7%;
     position: sticky;
     margin-bottom: 0 !important;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: #fff;
+    z-index: 10;
     button {
       // width: 88%;
       // width: 97%;

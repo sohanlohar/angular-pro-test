@@ -576,9 +576,14 @@
         <input matInput formControlName="weight" maxlength="6" />
       </pos-form-control-wrapper>
       <mat-icon
+        #tooltipWe="matTooltip"
         class="info_style"
         matSuffix
-        matTooltip="Shipment rate will be calculated based on parcel weight or volumetric weight whichever is higher"
+        matTooltip="{{ languageData.shipment_rate_note }}"
+        matTooltipTouchGestures="auto"
+        matTooltipClass="mobile-tooltip"
+        (click)="showMobileTooltip(tooltipWe)"
+        (touchstart)="showMobileTooltip(tooltipWe)"
         >info_outline</mat-icon
       >
     </mat-form-field>
@@ -647,10 +652,32 @@
           <li>
             <b>{{ languageData.insurance_note4_1_bold }}</b>
             {{ languageData.insurance_note4_1 }}
+            <mat-icon
+              class="info_style"
+              matSuffix
+              #tooltipRef="matTooltip"
+              [matTooltip]="languageData.insurance_note4_1_tootlTip"
+              matTooltipTouchGestures="auto"
+              matTooltipClass="mobile-tooltip"
+              (click)="showMobileTooltip(tooltipRef)"
+              (touchstart)="showMobileTooltip(tooltipRef)"
+              >info_outline
+            </mat-icon>
           </li>
           <li>
             <b>{{ languageData.insurance_note4_2_bold }}</b>
             {{ languageData.insurance_note4_2 }}
+            <mat-icon
+              class="info_style"
+              matSuffix
+              #tooltip="matTooltip"
+              [matTooltip]="languageData.insurance_note4_2_tootlTip"
+              matTooltipTouchGestures="auto"
+              matTooltipClass="mobile-tooltip"
+              (click)="showMobileTooltip(tooltip)"
+              (touchstart)="showMobileTooltip(tooltip)"
+              >info_outline
+            </mat-icon>
           </li>
         </ul>
       </div>
@@ -772,9 +799,14 @@
               <input matInput formControlName="weight" maxlength="6" />
             </pos-form-control-wrapper>
             <mat-icon
+              #tooltipDei="matTooltip"
               class="info_style"
               matSuffix
               [matTooltip]="languageData.shipment_rate_note"
+              matTooltipTouchGestures="auto"
+              matTooltipClass="mobile-tooltip"
+              (click)="showMobileTooltip(tooltipDei)"
+              (touchstart)="showMobileTooltip(tooltipDei)"
               >info_outline</mat-icon
             >
           </mat-form-field>

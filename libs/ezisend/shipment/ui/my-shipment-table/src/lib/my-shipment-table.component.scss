@@ -404,7 +404,7 @@
           }
         }
         .action-icon {
-        background-color: #d6eaff;
+          background-color: #d6eaff;
           border-radius: 50%;
           color: #00498d;
           padding: 10px;
@@ -692,6 +692,9 @@
   }
   .wrapper .tablewrapper table .filter-container.padding-left {
     padding-left: 0px !important;
+  }
+  .cdk-column-pickupAddress {
+    min-width: 170px;
   }
 }
 

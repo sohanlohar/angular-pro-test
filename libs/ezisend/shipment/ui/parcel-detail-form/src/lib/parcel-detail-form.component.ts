@@ -10,7 +10,7 @@ import {
   AfterViewInit,
   ViewChild,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -58,9 +58,10 @@ import { bm } from '../../../../../assets/my';
 import { en } from '../../../../../assets/en';
 import { TranslationService } from '../../../../../shared-services/translate.service';
 import { IPickupAddress } from '@pos/ezisend/profile/data-access/models';
+import { MatTooltip } from '@angular/material/tooltip';
 export const HSCLIST: IHSC[] = [];
-export const COD_AMOUNT = 3000
-export const MELPLUS_COD_AMOUNT = 500
+export const COD_AMOUNT = 3000;
+export const MELPLUS_COD_AMOUNT = 500;
 export interface IProductDisable {
   category: string;
   country: string;
@@ -96,8 +97,8 @@ export class ParcelDetailFormComponent
   custom_title = 'Origin Country';
   is_cod = false;
   isCOD = false;
-  isFeatureCODChecked =  false;
-  isMelPlus = false
+  isFeatureCODChecked = false;
+  isMelPlus = false;
   isDisable = true;
   isParcel = false;
   isMPS = false;
@@ -105,7 +106,7 @@ export class ParcelDetailFormComponent
   HSCList: any;
   CountryList: any;
   isSubmitting = false;
-  isFound: any
+  isFound: any;
   customDeclarationsIsLoading = false;
   warningMessage: string | null = null;
   showWarning = false;
@@ -121,12 +122,12 @@ export class ParcelDetailFormComponent
     ['Surface Parcel', ['Parcel']],
   ]);
   public category_details = [
-    { name: 'Sales of goods', value: 'Sales of goods'},
-    { name: 'Returned goods', value: 'Returned goods'},
-    { name: 'Gift', value: 'Gift'},
-    { name: 'Commercial Sample', value: 'Commercial Sample'},
-    { name: 'Document', value: 'Document'},
-    { name: 'Others', value: 'Others'}
+    { name: 'Sales of goods', value: 'Sales of goods' },
+    { name: 'Returned goods', value: 'Returned goods' },
+    { name: 'Gift', value: 'Gift' },
+    { name: 'Commercial Sample', value: 'Commercial Sample' },
+    { name: 'Document', value: 'Document' },
+    { name: 'Others', value: 'Others' },
   ];
   insuranceUrl =
     'https://www.pos.com.my/legal/terms-and-conditions-poscoverageplus';
@@ -167,9 +168,9 @@ export class ParcelDetailFormComponent
         Validators.pattern(this.commonService.numericWithDecimalOnly),
       ],
     ],
-    totalWeight: [{ value: '', disabled: true}, [Validators.required]],
+    totalWeight: [{ value: '', disabled: true }, [Validators.required]],
     totalInsured: [{ value: '', disabled: false }, [Validators.max(5000)]],
-    totalPremiumAmount: [{value: '', disabled: true}],
+    totalPremiumAmount: [{ value: '', disabled: true }],
     volumetricWeight: [{ value: '', disabled: true }, [Validators.required]],
     chargeableWeight: [{ value: '', disabled: true }, [Validators.required]],
     noShipments: [{ value: 2, disabled: true }],
@@ -183,7 +184,7 @@ export class ParcelDetailFormComponent
       [
         Validators.pattern(this.commonService.numericWithDecimalOnly),
         Validators.min(1),
-        Validators.max(COD_AMOUNT)
+        Validators.max(COD_AMOUNT),
       ],
     ],
     sum_insured: [
@@ -193,9 +194,7 @@ export class ParcelDetailFormComponent
         Validators.max(5000),
       ],
     ],
-    premiumAmt: [
-      { value: '', disabled: true },
-    ],
+    premiumAmt: [{ value: '', disabled: true }],
     mps_child_declarations: this.fb.array([]),
   });
   parcelDetailsForm = this.fb.group({
@@ -207,7 +206,7 @@ export class ParcelDetailFormComponent
       [
         Validators.required,
         Validators.pattern(this.commonService.numericWithDecimalOnly),
-        Validators.max(200)
+        Validators.max(200),
       ],
     ],
     length: [
@@ -231,21 +230,23 @@ export class ParcelDetailFormComponent
       [
         Validators.required,
         Validators.pattern(this.commonService.numericWithDecimalOnly),
-        Validators.max(60)
+        Validators.max(60),
       ],
     ],
     volumetricWeight: [{ value: '', disabled: true }, [Validators.required]],
     chargeableWeight: [{ value: '', disabled: true }, [Validators.required]],
     content: ['', Validators.required],
     parcelNotes: [''],
-    sender_ref: ['',[Validators.maxLength(50)]],
+    sender_ref: ['', [Validators.maxLength(50)]],
     codCheck: [false],
     insuranceCheck: [false],
     amount: [
       '',
-      [Validators.pattern(this.commonService.numericWithDecimalOnly),
+      [
+        Validators.pattern(this.commonService.numericWithDecimalOnly),
         Validators.min(1),
-        Validators.max(COD_AMOUNT)],
+        Validators.max(COD_AMOUNT),
+      ],
     ],
     sum_insured: [
       '',
@@ -266,30 +267,36 @@ export class ParcelDetailFormComponent
   selected_category_detail = '';
   selected_product = '';
   parcelAbroadForm!: FormGroup;
-  weightTooltip = 'Shipment rate will be calculated based on parcel weight or volumetric weight whichever is higher';
-  melplusTooltip = 'Shipment rate is based on zone and weight band (in kg).'
-  languageObj: any = (localStorage.getItem("language") && localStorage.getItem("language") === 'en') ? en.data :
-  (localStorage.getItem("language") && localStorage.getItem("language") === 'my') ? bm.data :
-    en.data;
+  weightTooltip =
+    'Shipment rate will be calculated based on parcel weight or volumetric weight whichever is higher';
+  melplusTooltip = 'Shipment rate is based on zone and weight band (in kg).';
+  languageObj: any =
+    localStorage.getItem('language') &&
+    localStorage.getItem('language') === 'en'
+      ? en.data
+      : localStorage.getItem('language') &&
+        localStorage.getItem('language') === 'my'
+      ? bm.data
+      : en.data;
   languageData: any;
   languageForm: any;
   @Output() selectValue = new EventEmitter<any>();
   isFeatureCod: any;
   isMelPlusCod: any;
-  isconfirmOrderEnable: any =false;
+  isconfirmOrderEnable: any = false;
   isFeatureCOD: any;
   isCountryMY = true;
   isPendingPickup = false;
   getCitiesByPostcode$!: Observable<any>;
 
-   // SPPI-2323 : Suspend/Block Countries for EMS, Air Parcel & Surface Parcel
-   productMapping: { [key: string]: string } = {
-    'EMS': 'Pos Laju International',
+  // SPPI-2323 : Suspend/Block Countries for EMS, Air Parcel & Surface Parcel
+  productMapping: { [key: string]: string } = {
+    EMS: 'Pos Laju International',
     'Air Parcel': 'Economy International (Air)',
-    'Surface Parcel': 'Economy International (Surface)'
+    'Surface Parcel': 'Economy International (Surface)',
   };
 
-    constructor(
+  constructor(
     private _snackBar: MatSnackBar,
     private fb: UntypedFormBuilder,
     public dialog: MatDialog,
@@ -300,19 +307,18 @@ export class ParcelDetailFormComponent
     private stepper: MatStepper,
     private translate: TranslationService,
     private snackBar: MatSnackBar,
-    private router: Router,
+    private router: Router
   ) {
     this.assignLanguageLabel();
     this.translate.buttonClick$.subscribe(() => {
-      if (localStorage.getItem("language") == "en") {
-        this.languageObj = en.data
-      }
-      else if (localStorage.getItem("language") == "my") {
-        this.languageObj = bm.data
+      if (localStorage.getItem('language') == 'en') {
+        this.languageObj = en.data;
+      } else if (localStorage.getItem('language') == 'my') {
+        this.languageObj = bm.data;
       }
       this.assignLanguageLabel();
       this.cdr.detectChanges();
-    })
+    });
     const _WIDTH = this.parcelDetailsForm.controls['width'];
     const _LENGTH = this.parcelDetailsForm.controls['length'];
     const _HEIGHT = this.parcelDetailsForm.controls['height'];
@@ -330,7 +336,7 @@ export class ParcelDetailFormComponent
     _SUMINSURED.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe((val: number) => {
-        if(this.canImplementNewRatePremiumAmt()){
+        if (this.canImplementNewRatePremiumAmt()) {
           const percentToGet = 1;
           const res = (val * percentToGet) / 100;
           _PREMIUMAMT.setValue(res.toFixed(2));
@@ -344,66 +350,76 @@ export class ParcelDetailFormComponent
           }
         }
       });
-      this.commonService.getIsMelplus$.subscribe(res=>{
-        this.isfetaureMelPlus = res;
-      })
-      this.commonService.getIsMelplusCod$.subscribe(res=>{
-        this.isMelPlusCod = res;
-      })
-      this.commonService.getIsCod$.subscribe(res=>{
-        this.isFeatureCod = res;
-      })
-      this.commonService.getIsCodUbat$.subscribe(res=>{
-        if(res){
-          this.parcelDetailsForm.get('category')?.setValue('Ubat');
-          this.parcelDetailsForm.controls['weight'].setValidators([
-            Validators.max(2),
-            Validators.required,
-            Validators.pattern(this.commonService.numericWithDecimalOnly),
-          ])
-          this.parcelDetailsForm.controls['length'].setValidators([
-            Validators.max(33),
-            Validators.required,
-            Validators.pattern(this.commonService.numericWithDecimalOnly),
-          ])
-          this.parcelDetailsForm.controls['width'].setValidators([
-            Validators.max(26),
-            Validators.required,
-            Validators.pattern(this.commonService.numericWithDecimalOnly),
-          ])
-          this.parcelDetailsForm.controls['height'].setValidators([
-            Validators.max(10),
-            Validators.required,
-            Validators.pattern(this.commonService.numericWithDecimalOnly),
-          ])
-        }
-      })
-      if(this.isReturnOrder){
-        this.parcelAbroadForm.disable();
-        this.parcelDetailsForm.disable();
-        this.mpsDetailsForm.disable();
-       }
+    this.commonService.getIsMelplus$.subscribe((res) => {
+      this.isfetaureMelPlus = res;
+    });
+    this.commonService.getIsMelplusCod$.subscribe((res) => {
+      this.isMelPlusCod = res;
+    });
+    this.commonService.getIsCod$.subscribe((res) => {
+      this.isFeatureCod = res;
+    });
+    this.commonService.getIsCodUbat$.subscribe((res) => {
+      if (res) {
+        this.parcelDetailsForm.get('category')?.setValue('Ubat');
+        this.parcelDetailsForm.controls['weight'].setValidators([
+          Validators.max(2),
+          Validators.required,
+          Validators.pattern(this.commonService.numericWithDecimalOnly),
+        ]);
+        this.parcelDetailsForm.controls['length'].setValidators([
+          Validators.max(33),
+          Validators.required,
+          Validators.pattern(this.commonService.numericWithDecimalOnly),
+        ]);
+        this.parcelDetailsForm.controls['width'].setValidators([
+          Validators.max(26),
+          Validators.required,
+          Validators.pattern(this.commonService.numericWithDecimalOnly),
+        ]);
+        this.parcelDetailsForm.controls['height'].setValidators([
+          Validators.max(10),
+          Validators.required,
+          Validators.pattern(this.commonService.numericWithDecimalOnly),
+        ]);
+      }
+    });
+    if (this.isReturnOrder) {
+      this.parcelAbroadForm.disable();
+      this.parcelDetailsForm.disable();
+      this.mpsDetailsForm.disable();
+    }
   }
-  assignLanguageLabel(){
+  assignLanguageLabel() {
     this.languageData = this.languageObj['myShipments']['parcel_data'];
     this.languageForm = this.languageObj['form_data'];
     this.weightTooltip = this.languageData.weight_tooltip;
     this.melplusTooltip = this.languageData.melplus_tooltip;
     this.custom_title = this.languageData.origin_country;
     this.category = new Map<string, any[]>([
-      ['Pos Laju International', [
-        {name: 'Document', value: this.languageForm.document},
-        {name: 'Merchandise', value: this.languageForm.merchandise}]],
-        ['Economy International (Air)', [{name: 'Parcel', value: this.languageData.parcel}]],
-        ['Economy International (Surface)', [{name: 'Parcel', value: this.languageData.parcel}]],
+      [
+        'Pos Laju International',
+        [
+          { name: 'Document', value: this.languageForm.document },
+          { name: 'Merchandise', value: this.languageForm.merchandise },
+        ],
+      ],
+      [
+        'Economy International (Air)',
+        [{ name: 'Parcel', value: this.languageData.parcel }],
+      ],
+      [
+        'Economy International (Surface)',
+        [{ name: 'Parcel', value: this.languageData.parcel }],
+      ],
     ]);
     this.category_details = [
-      { name: 'Sales of Goods', value: this.languageForm.sales_of_goods},
-      { name: 'Returned Goods', value: this.languageForm.returned_goods},
-      { name: 'Gift', value: this.languageForm.gift},
-      { name: 'Document', value: this.languageForm.document},
-      { name: 'Commercial Sample', value: this.languageForm.commercial_sample},
-      { name: 'Others', value: this.languageForm.others}
+      { name: 'Sales of Goods', value: this.languageForm.sales_of_goods },
+      { name: 'Returned Goods', value: this.languageForm.returned_goods },
+      { name: 'Gift', value: this.languageForm.gift },
+      { name: 'Document', value: this.languageForm.document },
+      { name: 'Commercial Sample', value: this.languageForm.commercial_sample },
+      { name: 'Others', value: this.languageForm.others },
     ];
   }
   ngAfterViewInit() {
@@ -411,18 +427,21 @@ export class ParcelDetailFormComponent
   }
 
   ngOnInit() {
-
-    this.isPendingPickup = this.router.url.includes('pending-pickup') ? true : false;
-    this.commonService.getCurrentIsCountryMY$.subscribe(res=>{
+    this.isPendingPickup = this.router.url.includes('pending-pickup')
+      ? true
+      : false;
+    this.commonService.getCurrentIsCountryMY$.subscribe((res) => {
       this.isCountryMY = res;
-    })
-        this.commonService.setCurrentSelectedPickupAddress();
-        this.parcelDetailsForm.get('weight')?.valueChanges.subscribe(() => {
-          this.calculateChargeableWeight(this.parcelDetailsForm);
-        });
-        this.parcelDetailsForm.get('volumetricWeight')?.valueChanges.subscribe(() => {
-          this.calculateChargeableWeight(this.parcelDetailsForm);
-        });
+    });
+    this.commonService.setCurrentSelectedPickupAddress();
+    this.parcelDetailsForm.get('weight')?.valueChanges.subscribe(() => {
+      this.calculateChargeableWeight(this.parcelDetailsForm);
+    });
+    this.parcelDetailsForm
+      .get('volumetricWeight')
+      ?.valueChanges.subscribe(() => {
+        this.calculateChargeableWeight(this.parcelDetailsForm);
+      });
     // listen for search field value changes
     this.HSCFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -430,7 +449,7 @@ export class ParcelDetailFormComponent
         this.filterHSCLists();
       });
     this.getSuspendedCountryList();
-        this.parcelAbroadForm = this.fb.group({
+    this.parcelAbroadForm = this.fb.group({
       category: ['', Validators.required],
       category_details: ['', Validators.required],
       product: ['', Validators.required],
@@ -460,7 +479,7 @@ export class ParcelDetailFormComponent
         [
           Validators.required,
           Validators.pattern(this.commonService.numericWithDecimalOnly),
-          Validators.max(30)
+          Validators.max(30),
         ],
       ],
       volumetricWeight: [{ value: '', disabled: true }, [Validators.required]],
@@ -492,16 +511,18 @@ export class ParcelDetailFormComponent
     this.parcelAbroadForm.get('weight')?.valueChanges.subscribe(() => {
       this.calculateChargeableWeight(this.parcelAbroadForm);
     });
-     // Listen to changes on the weight, length, width, and height fields to update warnings
-      // Subscribe to `parcelAbroadForm` for international shipments
-  this.parcelAbroadForm.valueChanges.pipe(debounceTime(300)).subscribe(() => {
-    this.validatePosLajuConditions();
-  });
+    // Listen to changes on the weight, length, width, and height fields to update warnings
+    // Subscribe to `parcelAbroadForm` for international shipments
+    this.parcelAbroadForm.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.validatePosLajuConditions();
+    });
 
-  // Subscribe to `parcelDetailsForm` for domestic shipments
-  this.parcelDetailsForm.valueChanges.pipe(debounceTime(300)).subscribe(() => {
-    this.validateDomesticConditions();
-  });
+    // Subscribe to `parcelDetailsForm` for domestic shipments
+    this.parcelDetailsForm.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        this.validateDomesticConditions();
+      });
     merge(
       _WIDTH_ABRD.valueChanges,
       _LENGTH_ABRD.valueChanges,
@@ -513,12 +534,12 @@ export class ParcelDetailFormComponent
           (_LENGTH_ABRD.value * _WIDTH_ABRD.value * _HEIGHT_ABRD.value) / 5000
         );
         this.updateChargeableWeight();
-              this.cdr.detectChanges();
+        this.cdr.detectChanges();
       });
     _SUMINSURED_ABRD.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe((val: number) => {
-        if(this.canImplementNewRatePremiumAmt()){
+        if (this.canImplementNewRatePremiumAmt()) {
           const percentToGet = 1;
           const res = (val * percentToGet) / 100;
           _PREMIUMAMT_ABRD.setValue(res.toFixed(2));
@@ -592,20 +613,20 @@ export class ParcelDetailFormComponent
         this.is_cod = latestStatus;
         this.cdr.detectChanges();
       });
-      // this localStorage item was set in return-order mode to disable the COD option
-      if(this.isReturnOrder){
-        const parcel_is_cod = localStorage.getItem('parcel_details.is_cod')
-        if(!parcel_is_cod){
-          this.is_cod = false;
-        }
+    // this localStorage item was set in return-order mode to disable the COD option
+    if (this.isReturnOrder) {
+      const parcel_is_cod = localStorage.getItem('parcel_details.is_cod');
+      if (!parcel_is_cod) {
+        this.is_cod = false;
       }
+    }
     if (this.isEditOrder || this.isReturnOrder) {
       this.commonService.getSelectedPickUp$
         .pipe(takeUntil(this._onDestroy))
         .subscribe((pickupID) => {
           this.commonService.setRecipientValue({
             ...this.commonService.getRecipientValue(),
-            sender: { pickup_option_id: pickupID }
+            sender: { pickup_option_id: pickupID },
           });
         });
       this.commonService.getParcelDetail$
@@ -613,11 +634,12 @@ export class ParcelDetailFormComponent
         .subscribe((parcelDetails) => {
           // // For product
           const productCategoryMap: Record<string, string> = {
-            'EMS': 'Pos Laju International',
+            EMS: 'Pos Laju International',
             'Air Parcel': 'Economy International (Air)',
             'Surface Parcel': 'Economy International (Surface)',
           };
-          this.product_category = productCategoryMap[parcelDetails?.product] || this.product_category;
+          this.product_category =
+            productCategoryMap[parcelDetails?.product] || this.product_category;
           // this.product_category = parcelDetails?.product;
 
           this.category_item = parcelDetails?.category;
@@ -629,7 +651,7 @@ export class ParcelDetailFormComponent
                 ? { data: 'Malaysia', isParcel: false }
                 : { data: '', isParcel: false };
             this.commonService.getCountryValue(countryValue);
-            if(parcelDetails.category.toLowerCase() === 'melplus'){
+            if (parcelDetails.category.toLowerCase() === 'melplus') {
               this.commonService.isMelPlusSelected.next(true);
               this.isMelPlus = true;
               this.parcelDetailsForm.controls['width'].setValidators([
@@ -686,58 +708,68 @@ export class ParcelDetailFormComponent
         });
     }
     this.orderId = this.route.snapshot.paramMap.get('id');
-    if(this.isReturnOrder){
+    if (this.isReturnOrder) {
       this.parcelAbroadForm.disable();
       this.parcelDetailsForm.disable();
       this.mpsDetailsForm.disable();
-     }
-     this.commonService.getCurrentSelectedPickupAddress$.subscribe((val: any) => {
-      if(val !==null){
-       this.isconfirmOrderEnable=true
-      }
-    })
-  if(this.route.snapshot.paramMap.get('id1')){
-      this.commonService
-        .fetchList('pickupaddress', 'list')
-        .subscribe({
-          next:(pickupaddress)=>{
-            const unId = Number(this.route.snapshot.paramMap.get('id1'))
-            const address = pickupaddress.data['pickup-addresses'].find((address: IPickupAddress) => address.id === unId);
-        if (address) {
-          this.isFound = true
-          this.commonService.setCurrentSelectedPickupAddress(address);
-          this.commonService.setSelectedPickUpID(address.id);
+    }
+    this.commonService.getCurrentSelectedPickupAddress$.subscribe(
+      (val: any) => {
+        if (val !== null) {
           this.isconfirmOrderEnable = true;
         }
-          },
-          error:()=>{
-            this.cdr.detectChanges();
-            this.commonService.openErrorDialog();
-          }
-        });
       }
+    );
+    if (this.route.snapshot.paramMap.get('id1')) {
+      this.commonService.fetchList('pickupaddress', 'list').subscribe({
+        next: (pickupaddress) => {
+          const unId = Number(this.route.snapshot.paramMap.get('id1'));
+          const address = pickupaddress.data['pickup-addresses'].find(
+            (address: IPickupAddress) => address.id === unId
+          );
+          if (address) {
+            this.isFound = true;
+            this.commonService.setCurrentSelectedPickupAddress(address);
+            this.commonService.setSelectedPickUpID(address.id);
+            this.isconfirmOrderEnable = true;
+          }
+        },
+        error: () => {
+          this.cdr.detectChanges();
+          this.commonService.openErrorDialog();
+        },
+      });
+    }
   }
   ngOnChanges(changes: SimpleChanges): void {
-      if(changes['isReturnOrder'].currentValue){
-        this.isReturnOrder = changes['isReturnOrder'].currentValue;
-      }
+    if (changes['isReturnOrder'].currentValue) {
+      this.isReturnOrder = changes['isReturnOrder'].currentValue;
+    }
   }
-    setParcelType(event:any, index:number){
-    this.customs_declarations.controls[index].get('parcel_type')?.setValue(event)
+  setParcelType(event: any, index: number) {
+    this.customs_declarations.controls[index]
+      .get('parcel_type')
+      ?.setValue(event);
   }
   updateChargeableWeight() {
     const weight = this.parcelAbroadForm.controls['weight'].value;
-    const volumetricWeight = this.parcelAbroadForm.controls['volumetricWeight'].value;
+    const volumetricWeight =
+      this.parcelAbroadForm.controls['volumetricWeight'].value;
     if (weight !== null && volumetricWeight !== null) {
       const chargeableWeight = Math.max(weight, volumetricWeight);
-      this.parcelAbroadForm.controls['chargeableWeight'].setValue(chargeableWeight, { emitEvent: false });
+      this.parcelAbroadForm.controls['chargeableWeight'].setValue(
+        chargeableWeight,
+        { emitEvent: false }
+      );
       // Manually trigger change detection to ensure the UI updates
       this.cdr.detectChanges();
     }
   }
   calculateChargeableWeight(formGroup: FormGroup) {
     const weight = parseFloat(formGroup.get('weight')?.value || '0');
-    const volumetricWeight = parseFloat(formGroup.get('volumetricWeight')?.value || '0');
+    const volumetricWeight = parseFloat(
+      formGroup.get('volumetricWeight')?.value || '0'
+    );
     const chargeableWeight = Math.max(weight, volumetricWeight);
     formGroup.get('chargeableWeight')?.setValue(chargeableWeight);
   }
@@ -781,7 +813,9 @@ export class ParcelDetailFormComponent
   private buildCustomItem(custom: ICustomDetails): ICustomDetailFormGroup {
     return {
       parcel_type: this.HSCList.find(
-        (hsc: IHSC) => hsc?.hscode === custom?.hscode && hsc?.keyword === custom?.item_category
+        (hsc: IHSC) =>
+          hsc?.hscode === custom?.hscode &&
+          hsc?.keyword === custom?.item_category
       ),
       item_description: custom.parcel_description,
       weight: custom.weight,
@@ -807,13 +841,13 @@ export class ParcelDetailFormComponent
     this._onDestroy.next();
     this._onDestroy.complete();
   }
-  getCategory(category: string){
+  getCategory(category: string) {
     this.isCOD = false;
     this.isFeatureCODChecked = false;
     this.parcelDetailsForm.controls['codCheck'].setValue(false);
     this.parcelDetailsForm.controls['insuranceCheck'].setValue(false);
     if (this.showCOD()) {
-      this.getCODVal()
+      this.getCODVal();
     }
     if (this.isMelPlus && this.isMelPlusCod && this.isfetaureMelPlus) {
       this.getMelCODVal();
@@ -822,9 +856,9 @@ export class ParcelDetailFormComponent
       event: 'select_parcel_category',
       event_category: 'SendParcel Pro - Single Shipments',
       event_action: 'Select Parcel Category',
-      event_label: "Parcel Category -" +category,
+      event_label: 'Parcel Category -' + category,
     });
-    if( category === "MelPlus"){
+    if (category === 'MelPlus') {
       this.commonService.isMelPlusSelected.next(true);
       this.isMelPlus = true;
       this.isMPS = false;
@@ -853,17 +887,17 @@ export class ParcelDetailFormComponent
         Validators.max(2),
       ]);
       this.commonService.isMPSSelected.next(false);
-    } else if(category === "Parcel"){
-        this.isMelPlus = false;
-        this.isMPS = false;
-        this.parcelDetailsForm.controls['weight'].setValue('');
-        this.parcelDetailsForm.controls['weight'].setValidators([
+    } else if (category === 'Parcel') {
+      this.isMelPlus = false;
+      this.isMPS = false;
+      this.parcelDetailsForm.controls['weight'].setValue('');
+      this.parcelDetailsForm.controls['weight'].setValidators([
         Validators.required,
         Validators.pattern(this.commonService.numericWithDecimalOnly),
         Validators.max(60),
       ]);
       this.commonService.isMPSSelected.next(false);
-    } else if(category === "MPS") {
+    } else if (category === 'MPS') {
       this.isMPS = true;
       this.isMelPlus = false;
       this.commonService.isMPSSelected.next(true);
@@ -946,14 +980,21 @@ export class ParcelDetailFormComponent
       data.insuranceCheck = parcelDetails.is_insured;
       data = {
         ...data,
-        mps_child_declarations : this.setChildShipmentData(parcelDetails.parcel_Info.children)
+        mps_child_declarations: this.setChildShipmentData(
+          parcelDetails.parcel_Info.children
+        ),
       };
       this.mpsDetailsForm.patchValue(data);
-      if (data?.mps_child_declarations && data?.mps_child_declarations?.length > 0) {
-        const customsArray = this.mpsDetailsForm.get('mps_child_declarations') as FormArray;
+      if (
+        data?.mps_child_declarations &&
+        data?.mps_child_declarations?.length > 0
+      ) {
+        const customsArray = this.mpsDetailsForm.get(
+          'mps_child_declarations'
+        ) as FormArray;
         customsArray.clear();
-        if(customsArray){
-          data?.mps_child_declarations?.forEach((customsDeclaration:any) => {
+        if (customsArray) {
+          data?.mps_child_declarations?.forEach((customsDeclaration: any) => {
             customsArray.push(this.fb.group(customsDeclaration));
           });
         }
@@ -1016,7 +1057,8 @@ export class ParcelDetailFormComponent
     dialogConfig.data = { isreturnorder: this.isReturnOrder };
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.height = this.isEditOrder || this.isReturnOrder? '325px' : '410px';
+    dialogConfig.height =
+      this.isEditOrder || this.isReturnOrder ? '325px' : '410px';
     dialogConfig.maxWidth = '680px';
     this.dialog.open(ModalDialogComponent, dialogConfig);
   }
@@ -1113,43 +1155,44 @@ export class ParcelDetailFormComponent
       amountControl.setValidators([
         Validators.required,
         Validators.pattern(this.commonService.numericWithDecimalOnly),
-        this.maxAmountValidator.bind(this)
+        this.maxAmountValidator.bind(this),
       ]);
       amountControl.updateValueAndValidity();
     }
   }
   maxAmountValidator(control: FormControl): { [s: string]: boolean } | null {
     if (parseFloat(control.value) > COD_AMOUNT) {
-        return { maxAmountExceeded: true };
+      return { maxAmountExceeded: true };
     }
     return null;
-}
+  }
   roundAmount() {
     const amountControl = this.parcelDetailsForm.controls['amount'];
     if (amountControl.value !== null && amountControl.value !== undefined) {
-        let amount = parseFloat(amountControl.value);
-        if (!isNaN(amount)) {
-            // Round the amount to two decimal places
-            amount = Math.round(amount * 100) / 100;
-            // Update the form control with the rounded amount
-            amountControl.setValue(amount.toFixed(2), { emitEvent: false });
-        }
+      let amount = parseFloat(amountControl.value);
+      if (!isNaN(amount)) {
+        // Round the amount to two decimal places
+        amount = Math.round(amount * 100) / 100;
+        // Update the form control with the rounded amount
+        amountControl.setValue(amount.toFixed(2), { emitEvent: false });
+      }
+    } else {
+      this.commonService.openErrorDialog(
+        'Error',
+        this.languageForm.validAmount
+      );
     }
-    else {
-      this.commonService.openErrorDialog('Error', this.languageForm.validAmount);
   }
-  }
-  OnChangeCODCheckbox(event:any){
+  OnChangeCODCheckbox(event: any) {
     if (this.showCOD()) {
       this.isCOD = event?.checked;
-      this.getCODVal()
-    }
-    else if (this.isMelPlus && this.isMelPlusCod && this.isfetaureMelPlus) {
+      this.getCODVal();
+    } else if (this.isMelPlus && this.isMelPlusCod && this.isfetaureMelPlus) {
       this.isFeatureCODChecked = event?.checked;
       this.getMelCODVal();
     }
   }
-  getMelCODVal(){
+  getMelCODVal() {
     const amountControl = this.parcelDetailsForm.controls['amount'];
     // this.isFeatureCODChecked = val.checked;
     if (!this.isFeatureCODChecked) {
@@ -1162,124 +1205,148 @@ export class ParcelDetailFormComponent
         Validators.required,
         Validators.pattern(this.commonService.numericWithDecimalOnly),
         Validators.min(1), // Minimum value
-        Validators.max(MELPLUS_COD_AMOUNT) // Maximum value
+        Validators.max(MELPLUS_COD_AMOUNT), // Maximum value
       ]);
       amountControl.updateValueAndValidity();
     }
   }
-    showError(message: string): void {
-      this.snackBar.open(message, this.languageForm?.close, {
-        duration: 5000,
-        panelClass: ['snack-bar-error']
-      });
-    }
+  showError(message: string): void {
+    this.snackBar.open(message, this.languageForm?.close, {
+      duration: 5000,
+      panelClass: ['snack-bar-error'],
+    });
+  }
 
-    VaidatedSenderPostcode(isMY: boolean, isMps : boolean){
+  VaidatedSenderPostcode(isMY: boolean, isMps: boolean) {
+    const pickUpDetails = this.commonService.getSelectedPickUpDetails();
 
-      const pickUpDetails = this.commonService.getSelectedPickUpDetails();
-
-      if(pickUpDetails.postcode?.length >= 5) {
-        // this.isPopulatingStateCity = true;
-        this.getCitiesByPostcode$ = this.commonService.getAPI(
-          'cities',
-          'querybypostcode?country=MY&postcode=' + pickUpDetails.postcode
-        );
-        this.getCitiesByPostcode$
-          .pipe(
-            takeUntil(this._onDestroy),
-            finalize(() => this.cdr.markForCheck())
-          )
-          .subscribe({
-            next: (val:any) => {
-              if (!val?.data?.length) {
-                this.showError(this.languageData?.invalid_sender_postcode)
-              }
-              else {
-                if(this.isPendingPickup && this.isEditOrder){
-                  this.submit_update_shipment(isMY,isMps);
-                }
-                else{
-                  this.submit_shipment(isMY,isMps);
-                }
-
+    if (pickUpDetails.postcode?.length >= 5) {
+      // this.isPopulatingStateCity = true;
+      this.getCitiesByPostcode$ = this.commonService.getAPI(
+        'cities',
+        'querybypostcode?country=MY&postcode=' + pickUpDetails.postcode
+      );
+      this.getCitiesByPostcode$
+        .pipe(
+          takeUntil(this._onDestroy),
+          finalize(() => this.cdr.markForCheck())
+        )
+        .subscribe({
+          next: (val: any) => {
+            if (!val?.data?.length) {
+              this.showError(this.languageData?.invalid_sender_postcode);
+            } else {
+              if (this.isPendingPickup && this.isEditOrder) {
+                this.submit_update_shipment(isMY, isMps);
+              } else {
+                this.submit_shipment(isMY, isMps);
               }
             }
-          });
-      }
-      else{
-        this.showError(this.languageData?.invalid_sender_postcode)
-      }
+          },
+        });
+    } else {
+      this.showError(this.languageData?.invalid_sender_postcode);
     }
-    submit_shipment(isMY: boolean, isMps : boolean) {
-
+  }
+  submit_shipment(isMY: boolean, isMps: boolean) {
     this.isSubmitting = true;
 
     const query = this.isEditOrder
       ? `save-basics/${this.orderId}`
-      : this.isReturnOrder ? 'save-rts' : 'save-basics';
+      : this.isReturnOrder
+      ? 'save-rts'
+      : 'save-basics';
 
     // For non-return orders, RecipientDetailFormComponent sets the full payload structure in commonService.getRecipientValue()
     // For return orders, we need to construct it carefully below.
 
-      if(this.isReturnOrder  ){
-
+    if (this.isReturnOrder) {
       // Get the original sender's details (now recipient of the return) which were edited in RecipientDetailFormComponent.
       // RecipientDetailFormComponent.saveRecipient() updates commonService.getRecipientValue().
       // The relevant part is commonService.getRecipientValue().recipient.
-      const originalSenderDetailsAsReturnRecipient = { ...this.commonService.getRecipientValue().recipient };
+      const originalSenderDetailsAsReturnRecipient = {
+        ...this.commonService.getRecipientValue().recipient,
+      };
 
-      if (originalSenderDetailsAsReturnRecipient && (originalSenderDetailsAsReturnRecipient.dialing_code == null || originalSenderDetailsAsReturnRecipient.dialing_code == "")) {
-        originalSenderDetailsAsReturnRecipient.dialing_code = "+60";
+      if (
+        originalSenderDetailsAsReturnRecipient &&
+        (originalSenderDetailsAsReturnRecipient.dialing_code == null ||
+          originalSenderDetailsAsReturnRecipient.dialing_code == '')
+      ) {
+        originalSenderDetailsAsReturnRecipient.dialing_code = '+60';
       }
 
       let originalRecipientDetailsAsReturnSender: IPickupAddress; // This will be the sender of the return (original recipient)
 
-      if(this.route.snapshot.params['id1']){
-      if(Number(this.commonService.getSelectedPickupID()) === Number(this.route.snapshot.params['id1'])  ){
-        this.commonService.getSenderAddress$.subscribe({
-          next:(senderAddressFromService:IPickupAddress) => { // This is original recipient, now sender of return
-            originalRecipientDetailsAsReturnSender = senderAddressFromService;
-            if (originalRecipientDetailsAsReturnSender && (originalRecipientDetailsAsReturnSender.dialing_code == null || originalRecipientDetailsAsReturnSender.dialing_code == "")) {
-              originalRecipientDetailsAsReturnSender.dialing_code = "+60";
-            }
-            this.commonService.setRecipientValue({
-              recipient: originalSenderDetailsAsReturnRecipient, // Correct: original sender's details (edited)
-              sender: originalRecipientDetailsAsReturnSender,    // Correct: original recipient's details
-              save_to_contact: this.commonService.getRecipientValue().save_to_contact // Preserve this
-            })
-          }
-        })
-    } else {
-      this.commonService.getCurrentSelectedPickupAddress$.subscribe({
-          next:(currentSelectedPickupAddress: any) => { // This is original recipient, now sender of return
-            originalRecipientDetailsAsReturnSender = currentSelectedPickupAddress;
-            if (originalRecipientDetailsAsReturnSender && (originalRecipientDetailsAsReturnSender.dialing_code == null || originalRecipientDetailsAsReturnSender.dialing_code == "")) {
-              originalRecipientDetailsAsReturnSender.dialing_code = "+60";
+      if (this.route.snapshot.params['id1']) {
+        if (
+          Number(this.commonService.getSelectedPickupID()) ===
+          Number(this.route.snapshot.params['id1'])
+        ) {
+          this.commonService.getSenderAddress$.subscribe({
+            next: (senderAddressFromService: IPickupAddress) => {
+              // This is original recipient, now sender of return
+              originalRecipientDetailsAsReturnSender = senderAddressFromService;
+              if (
+                originalRecipientDetailsAsReturnSender &&
+                (originalRecipientDetailsAsReturnSender.dialing_code == null ||
+                  originalRecipientDetailsAsReturnSender.dialing_code == '')
+              ) {
+                originalRecipientDetailsAsReturnSender.dialing_code = '+60';
+              }
+              this.commonService.setRecipientValue({
+                recipient: originalSenderDetailsAsReturnRecipient, // Correct: original sender's details (edited)
+                sender: originalRecipientDetailsAsReturnSender, // Correct: original recipient's details
+                save_to_contact:
+                  this.commonService.getRecipientValue().save_to_contact, // Preserve this
+              });
+            },
+          });
+        } else {
+          this.commonService.getCurrentSelectedPickupAddress$.subscribe({
+            next: (currentSelectedPickupAddress: any) => {
+              // This is original recipient, now sender of return
+              originalRecipientDetailsAsReturnSender =
+                currentSelectedPickupAddress;
+              if (
+                originalRecipientDetailsAsReturnSender &&
+                (originalRecipientDetailsAsReturnSender.dialing_code == null ||
+                  originalRecipientDetailsAsReturnSender.dialing_code == '')
+              ) {
+                originalRecipientDetailsAsReturnSender.dialing_code = '+60';
+              }
+              this.commonService.setRecipientValue({
+                recipient: originalSenderDetailsAsReturnRecipient,
+                sender: originalRecipientDetailsAsReturnSender,
+                save_to_contact:
+                  this.commonService.getRecipientValue().save_to_contact,
+              });
+            },
+          });
+        }
+      } else {
+        this.commonService.getCurrentSelectedPickupAddress$.subscribe({
+          next: (currentSelectedPickupAddress: any) => {
+            // This is original recipient, now sender of return
+            originalRecipientDetailsAsReturnSender =
+              currentSelectedPickupAddress;
+            if (
+              originalRecipientDetailsAsReturnSender &&
+              (originalRecipientDetailsAsReturnSender.dialing_code == null ||
+                originalRecipientDetailsAsReturnSender.dialing_code == '')
+            ) {
+              originalRecipientDetailsAsReturnSender.dialing_code = '+60';
             }
             this.commonService.setRecipientValue({
               recipient: originalSenderDetailsAsReturnRecipient,
               sender: originalRecipientDetailsAsReturnSender,
-              save_to_contact: this.commonService.getRecipientValue().save_to_contact
-            })
-          }
-        })
+              save_to_contact:
+                this.commonService.getRecipientValue().save_to_contact,
+            });
+          },
+        });
       }
-      }
-    else {
-    this.commonService.getCurrentSelectedPickupAddress$.subscribe({
-      next:(currentSelectedPickupAddress: any) => {  // This is original recipient, now sender of return
-        originalRecipientDetailsAsReturnSender = currentSelectedPickupAddress;
-        if (originalRecipientDetailsAsReturnSender && (originalRecipientDetailsAsReturnSender.dialing_code == null || originalRecipientDetailsAsReturnSender.dialing_code == "")) {
-          originalRecipientDetailsAsReturnSender.dialing_code = "+60";
-        }
-        this.commonService.setRecipientValue({
-          recipient: originalSenderDetailsAsReturnRecipient,
-          sender: originalRecipientDetailsAsReturnSender,
-          save_to_contact: this.commonService.getRecipientValue().save_to_contact
-        })
-      }
-    })
-  }  } // End of isReturnOrder block
+    } // End of isReturnOrder block
 
     const finalPayloadForApi = this.commonService.getRecipientValue();
     this.commonService
@@ -1287,22 +1354,28 @@ export class ParcelDetailFormComponent
       .pipe(
         takeUntil(this._onDestroy),
         map((result) => {
-          if(this.commonService.isCODUbat.getValue()) {
+          if (this.commonService.isCODUbat.getValue()) {
             return {
               query: 'save-codubat',
-              data: this.saveDomestic(result['data']['shipment_id'])
+              data: this.saveDomestic(result['data']['shipment_id']),
             };
           } else {
             const shipmentId = result['data']['shipment_id'];
             return isMY
-            ? !isMps ?{
-                query: 'save-domestic',
-                data: this.saveDomestic(shipmentId),
-              } : {query: 'save-mps', data: this.saveMps(result['data']['shipment_id'])}
-            : {
-                query: 'save-international',
-                data: this.saveIntl(shipmentId),
-              }; }
+              ? !isMps
+                ? {
+                    query: 'save-domestic',
+                    data: this.saveDomestic(shipmentId),
+                  }
+                : {
+                    query: 'save-mps',
+                    data: this.saveMps(result['data']['shipment_id']),
+                  }
+              : {
+                  query: 'save-international',
+                  data: this.saveIntl(shipmentId),
+                };
+          }
         }),
         exhaustMap(({ query, data }) =>
           this.commonService
@@ -1321,26 +1394,31 @@ export class ParcelDetailFormComponent
             event_category: 'SendParcel Pro - Single Shipments',
             event_action: 'Submit Parcel Details',
             event_label: 'Parcel Details',
-            parcel_category: this.parcelDetailsForm.value.category  || 'Null',
-            parcel_width: this.parcelAbroadForm.value.width  || 'Null',
-            parcel_height: this.parcelAbroadForm.value.height  || 'Null',
-            parcel_length: this.parcelAbroadForm.value.length  || 'Null',
-            parcel_weight: this.parcelAbroadForm.value.amount  || 'Null',
-            parcel_volumetric_weight: this.parcelDetailsForm.value.volumetricWeight  || 'Null',
-            parcel_chargeable_weight: this.parcelDetailsForm.value.chargeableWeight  || 'Null',
+            parcel_category: this.parcelDetailsForm.value.category || 'Null',
+            parcel_width: this.parcelAbroadForm.value.width || 'Null',
+            parcel_height: this.parcelAbroadForm.value.height || 'Null',
+            parcel_length: this.parcelAbroadForm.value.length || 'Null',
+            parcel_weight: this.parcelAbroadForm.value.amount || 'Null',
+            parcel_volumetric_weight:
+              this.parcelDetailsForm.value.volumetricWeight || 'Null',
+            parcel_chargeable_weight:
+              this.parcelDetailsForm.value.chargeableWeight || 'Null',
             item_description: this.parcelDetailsForm.value.content,
             status:
               'Status e.g. Picked Up / In Transit / Out For Delivery / Dropped Off',
             order_type: this.isCOD ? 'COD' : 'NON COD',
             currency: 'MYR',
-            cash_on_delivery_amount: this.isCOD ? this.parcelDetailsForm.value.amount : null,
+            cash_on_delivery_amount: this.isCOD
+              ? this.parcelDetailsForm.value.amount
+              : null,
             insured_shipping_insurance: this.isIssuredDOM ? 'Yes' : 'No',
-            sum_insured_amount: this.parcelAbroadForm.value.sum_insured  || 'Null',
-            premium_amount: this.parcelAbroadForm.value.premiumAmt  || 'Null',
+            sum_insured_amount:
+              this.parcelAbroadForm.value.sum_insured || 'Null',
+            premium_amount: this.parcelAbroadForm.value.premiumAmt || 'Null',
             shipment_type: 'Single Shipment',
-          }
+          };
           this.commonService.googleEventPush(eventDetails);
-          this.openSuccessDialog()
+          this.openSuccessDialog();
         },
         error: (err) => {
           // Extract errors from the API response
@@ -1348,20 +1426,25 @@ export class ParcelDetailFormComponent
           if (errors.length > 0) {
             // Create a consolidated error message
             const errorMessages = errors
-              .map((error: { field: any; message: any; }) => `${error.field}: ${error.message}`)
+              .map(
+                (error: { field: any; message: any }) =>
+                  `${error.field}: ${error.message}`
+              )
               .join('\n');
             // Show the error messages in the dialog
             this.commonService.openErrorDialog('', errorMessages, 'Ok');
           } else {
             // Fallback for unexpected errors
-            const message = err?.error?.error?.data?.message || this.languageForm.unexpectedError;
+            const message =
+              err?.error?.error?.data?.message ||
+              this.languageForm.unexpectedError;
             this.commonService.openErrorDialog('', message, 'Ok');
           }
         },
       });
   }
 
-  submit_update_shipment(isMY: boolean, isMps : boolean) {
+  submit_update_shipment(isMY: boolean, isMps: boolean) {
     this.isSubmitting = true;
     const query = `save/${this.orderId}`;
 
@@ -1369,94 +1452,126 @@ export class ParcelDetailFormComponent
     let parcel: Observable<any>;
     if (this.commonService.isCODUbat.getValue()) {
       parcel = this.saveDomestic(Number(this.orderId));
-    } else if (isMY) { // No need for the ternary within the else if
-      parcel = isMps ? this.saveMps(Number(this.orderId)) : this.saveDomestic(Number(this.orderId));
+    } else if (isMY) {
+      // No need for the ternary within the else if
+      parcel = isMps
+        ? this.saveMps(Number(this.orderId))
+        : this.saveDomestic(Number(this.orderId));
     } else {
       parcel = this.saveIntl(Number(this.orderId));
     }
 
-      if(this.isReturnOrder  ){
+    if (this.isReturnOrder) {
+      const originalSenderDetailsAsReturnRecipient = {
+        ...this.commonService.getRecipientValue().recipient,
+      };
+      if (
+        originalSenderDetailsAsReturnRecipient &&
+        (originalSenderDetailsAsReturnRecipient.dialing_code == null ||
+          originalSenderDetailsAsReturnRecipient.dialing_code == '')
+      ) {
+        originalSenderDetailsAsReturnRecipient.dialing_code = '+60';
+      }
 
-        const originalSenderDetailsAsReturnRecipient = { ...this.commonService.getRecipientValue().recipient };
-        if (originalSenderDetailsAsReturnRecipient && (originalSenderDetailsAsReturnRecipient.dialing_code == null || originalSenderDetailsAsReturnRecipient.dialing_code == "")) {
-            originalSenderDetailsAsReturnRecipient.dialing_code = "+60";
-        }
+      let originalRecipientDetailsAsReturnSender: IPickupAddress;
 
-        let originalRecipientDetailsAsReturnSender: IPickupAddress;
-
-        if(this.route.snapshot.params['id1']){
-          if(Number(this.commonService.getSelectedPickupID()) === Number(this.route.snapshot.params['id1'])  ){
-            this.commonService.getSenderAddress$.subscribe({
-              next:(senderAddressFromService:IPickupAddress) => { // Original recipient, now sender of return
-                originalRecipientDetailsAsReturnSender = senderAddressFromService;
-                if (originalRecipientDetailsAsReturnSender && (originalRecipientDetailsAsReturnSender.dialing_code == null || originalRecipientDetailsAsReturnSender.dialing_code == "")) {
-                  originalRecipientDetailsAsReturnSender.dialing_code = "+60";
-                }
-                this.commonService.setRecipientValue({
-                  recipient: originalSenderDetailsAsReturnRecipient,
-                  sender: originalRecipientDetailsAsReturnSender,
-                  save_to_contact: this.commonService.getRecipientValue().save_to_contact
-                })
-              }
-            })
-          } else {
-            this.commonService.getCurrentSelectedPickupAddress$.subscribe({
-              next:(currentSelectedPickupAddress: any) => { // Original recipient, now sender of return
-                originalRecipientDetailsAsReturnSender = currentSelectedPickupAddress;
-                if (originalRecipientDetailsAsReturnSender && (originalRecipientDetailsAsReturnSender.dialing_code == null || originalRecipientDetailsAsReturnSender.dialing_code == "")) {
-                  originalRecipientDetailsAsReturnSender.dialing_code = "+60";
-                }
-                this.commonService.setRecipientValue({
-                  recipient: originalSenderDetailsAsReturnRecipient,
-                  sender: originalRecipientDetailsAsReturnSender,
-                  save_to_contact: this.commonService.getRecipientValue().save_to_contact
-                })
-              }
-            })
-          }
-        }
-        else {
-          this.commonService.getCurrentSelectedPickupAddress$.subscribe({
-            next:(currentSelectedPickupAddress: any) => { // Original recipient, now sender of return
-              originalRecipientDetailsAsReturnSender = currentSelectedPickupAddress;
-              if (originalRecipientDetailsAsReturnSender && (originalRecipientDetailsAsReturnSender.dialing_code == null || originalRecipientDetailsAsReturnSender.dialing_code == "")) {
-                originalRecipientDetailsAsReturnSender.dialing_code = "+60";
+      if (this.route.snapshot.params['id1']) {
+        if (
+          Number(this.commonService.getSelectedPickupID()) ===
+          Number(this.route.snapshot.params['id1'])
+        ) {
+          this.commonService.getSenderAddress$.subscribe({
+            next: (senderAddressFromService: IPickupAddress) => {
+              // Original recipient, now sender of return
+              originalRecipientDetailsAsReturnSender = senderAddressFromService;
+              if (
+                originalRecipientDetailsAsReturnSender &&
+                (originalRecipientDetailsAsReturnSender.dialing_code == null ||
+                  originalRecipientDetailsAsReturnSender.dialing_code == '')
+              ) {
+                originalRecipientDetailsAsReturnSender.dialing_code = '+60';
               }
               this.commonService.setRecipientValue({
                 recipient: originalSenderDetailsAsReturnRecipient,
                 sender: originalRecipientDetailsAsReturnSender,
-                save_to_contact: this.commonService.getRecipientValue().save_to_contact
-              })
-            }
-          })
-        }
-      }
-      this.commonService
-          .submitData('shipments', query, {
-        basic: this.commonService.getRecipientValue(),
-        parcel: parcel
-      })
-          .subscribe({
-            next: () => {
-              this.isSubmitting = false;
-              this.openSuccessDialog();
-            },
-            error: (err) => {
-              if (err?.error?.error?.code === "E1003") {
-                this.commonService.openSnackBar(
-                  this.languageForm.editing_not_allowed_error, this.languageForm.close
-                );
-              } else {
-                this.commonService.openSnackBar(
-                  this.languageForm.unexpectedError, this.languageForm.close
-                );
-              }
-
-              this.isSubmitting = false;
-              this.cdr.markForCheck();
+                save_to_contact:
+                  this.commonService.getRecipientValue().save_to_contact,
+              });
             },
           });
+        } else {
+          this.commonService.getCurrentSelectedPickupAddress$.subscribe({
+            next: (currentSelectedPickupAddress: any) => {
+              // Original recipient, now sender of return
+              originalRecipientDetailsAsReturnSender =
+                currentSelectedPickupAddress;
+              if (
+                originalRecipientDetailsAsReturnSender &&
+                (originalRecipientDetailsAsReturnSender.dialing_code == null ||
+                  originalRecipientDetailsAsReturnSender.dialing_code == '')
+              ) {
+                originalRecipientDetailsAsReturnSender.dialing_code = '+60';
+              }
+              this.commonService.setRecipientValue({
+                recipient: originalSenderDetailsAsReturnRecipient,
+                sender: originalRecipientDetailsAsReturnSender,
+                save_to_contact:
+                  this.commonService.getRecipientValue().save_to_contact,
+              });
+            },
+          });
+        }
+      } else {
+        this.commonService.getCurrentSelectedPickupAddress$.subscribe({
+          next: (currentSelectedPickupAddress: any) => {
+            // Original recipient, now sender of return
+            originalRecipientDetailsAsReturnSender =
+              currentSelectedPickupAddress;
+            if (
+              originalRecipientDetailsAsReturnSender &&
+              (originalRecipientDetailsAsReturnSender.dialing_code == null ||
+                originalRecipientDetailsAsReturnSender.dialing_code == '')
+            ) {
+              originalRecipientDetailsAsReturnSender.dialing_code = '+60';
+            }
+            this.commonService.setRecipientValue({
+              recipient: originalSenderDetailsAsReturnRecipient,
+              sender: originalRecipientDetailsAsReturnSender,
+              save_to_contact:
+                this.commonService.getRecipientValue().save_to_contact,
+            });
+          },
+        });
       }
+    }
+    this.commonService
+      .submitData('shipments', query, {
+        basic: this.commonService.getRecipientValue(),
+        parcel: parcel,
+      })
+      .subscribe({
+        next: () => {
+          this.isSubmitting = false;
+          this.openSuccessDialog();
+        },
+        error: (err) => {
+          if (err?.error?.error?.code === 'E1003') {
+            this.commonService.openSnackBar(
+              this.languageForm.editing_not_allowed_error,
+              this.languageForm.close
+            );
+          } else {
+            this.commonService.openSnackBar(
+              this.languageForm.unexpectedError,
+              this.languageForm.close
+            );
+          }
+
+          this.isSubmitting = false;
+          this.cdr.markForCheck();
+        },
+      });
+  }
 
   saveDomestic(shipmentId: any) {
     const createShipment = {
@@ -1469,7 +1584,10 @@ export class ParcelDetailFormComponent
 
     let domesticData: any = {
       category: this.parcelDetailsForm.value.category,
-      cod_amount: this.commonService.isCODUbat.getValue() === true ? 0 : parseFloat(this.parcelDetailsForm.value.amount),
+      cod_amount:
+        this.commonService.isCODUbat.getValue() === true
+          ? 0
+          : parseFloat(this.parcelDetailsForm.value.amount),
       description: this.parcelDetailsForm.value.content,
       height: parseFloat(this.parcelDetailsForm.value.height),
       length: parseFloat(this.parcelDetailsForm.value.length),
@@ -1503,7 +1621,7 @@ export class ParcelDetailFormComponent
     this.commonService.googleEventPush(createShipment);
     let mpsData: any = {
       shipment_id: shipmentId,
-      category: "MPS",
+      category: 'MPS',
       width: parseFloat(this.mpsDetailsForm.value.width),
       height: parseFloat(this.mpsDetailsForm.value.height),
       length: parseFloat(this.mpsDetailsForm.value.length),
@@ -1511,11 +1629,13 @@ export class ParcelDetailFormComponent
       description: this.mpsDetailsForm.value.content,
       sender_ref: this.mpsDetailsForm.value.sender_ref,
       sum_insured: parseFloat(this.mpsDetailsForm.value.sum_insured),
-      total_sum_insured: parseFloat(this.mpsDetailsForm.getRawValue().totalInsured),
+      total_sum_insured: parseFloat(
+        this.mpsDetailsForm.getRawValue().totalInsured
+      ),
       child_shipments: this.childShipmentData(
         this.mpsDetailsForm.getRawValue().mps_child_declarations
       ),
-    }
+    };
     mpsData = {
       ...mpsData,
       is_insured:
@@ -1547,7 +1667,7 @@ export class ParcelDetailFormComponent
         ]);
 
         // Dimensions validation (length, width, height)
-        [lengthControl, widthControl, heightControl].forEach(control => {
+        [lengthControl, widthControl, heightControl].forEach((control) => {
           control?.setValidators([
             Validators.required,
             Validators.max(maxLongestSide),
@@ -1604,15 +1724,16 @@ export class ParcelDetailFormComponent
     });
 
     // Subscribe to value changes to update warnings dynamically
-    [weightControl, lengthControl, widthControl, heightControl].forEach(control => {
-      control?.valueChanges.subscribe(updateWarnings);
-    });
+    [weightControl, lengthControl, widthControl, heightControl].forEach(
+      (control) => {
+        control?.valueChanges.subscribe(updateWarnings);
+      }
+    );
 
     // Initialize validators and warnings on component load
     updateWarnings();
     updateValidators();
   }
-
 
   private validatePosLajuConditions(): void {
     const productControl = this.parcelAbroadForm.get('product');
@@ -1622,11 +1743,37 @@ export class ParcelDetailFormComponent
     const widthControl = this.parcelAbroadForm.get('width');
     const heightControl = this.parcelAbroadForm.get('height');
 
-    type ProductKey = 'Pos Laju International' | 'Economy International (Air)' | 'Economy International (Surface)';
-    const dimensions: Record<ProductKey, { minLength: number; minWidth: number; minHeight: number; maxLongestSide: number }> = {
-      'Pos Laju International': { minLength: 16, minWidth: 1, minHeight: 11, maxLongestSide: 150 },
-      'Economy International (Air)': { minLength: 16, minWidth: 1, minHeight: 11, maxLongestSide: 200 },
-      'Economy International (Surface)': { minLength: 16, minWidth: 1, minHeight: 11, maxLongestSide: 200 },
+    type ProductKey =
+      | 'Pos Laju International'
+      | 'Economy International (Air)'
+      | 'Economy International (Surface)';
+    const dimensions: Record<
+      ProductKey,
+      {
+        minLength: number;
+        minWidth: number;
+        minHeight: number;
+        maxLongestSide: number;
+      }
+    > = {
+      'Pos Laju International': {
+        minLength: 16,
+        minWidth: 1,
+        minHeight: 11,
+        maxLongestSide: 150,
+      },
+      'Economy International (Air)': {
+        minLength: 16,
+        minWidth: 1,
+        minHeight: 11,
+        maxLongestSide: 200,
+      },
+      'Economy International (Surface)': {
+        minLength: 16,
+        minWidth: 1,
+        minHeight: 11,
+        maxLongestSide: 200,
+      },
     };
 
     const weightLimits: Record<ProductKey, Record<string, number>> = {
@@ -1662,19 +1809,26 @@ export class ParcelDetailFormComponent
 
         // Weight validation
         if (weightLimit !== undefined) {
-          weightControl?.setValidators([Validators.required, Validators.max(weightLimit)]);
+          weightControl?.setValidators([
+            Validators.required,
+            Validators.max(weightLimit),
+          ]);
         }
 
         // Update validity for the controls
-        [lengthControl, widthControl, heightControl, weightControl].forEach((control) =>
-          control?.updateValueAndValidity({ emitEvent: false })
+        [lengthControl, widthControl, heightControl, weightControl].forEach(
+          (control) => control?.updateValueAndValidity({ emitEvent: false })
         );
       }
     };
 
     // Subscribe to value changes for product and category
-    productControl?.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(updateValidators);
-    categoryControl?.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(updateValidators);
+    productControl?.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(updateValidators);
+    categoryControl?.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(updateValidators);
 
     // Call once on initialization
     updateValidators();
@@ -1693,11 +1847,11 @@ export class ParcelDetailFormComponent
     let product = this.parcelAbroadForm.value.product;
     // Mapping product values for backend
     if (product === 'Pos Laju International') {
-        product = 'EMS';
+      product = 'EMS';
     } else if (product === 'Economy International (Air)') {
-        product = 'Air Parcel';
+      product = 'Air Parcel';
     } else if (product === 'Economy International (Surface)') {
-        product = 'Surface Parcel';
+      product = 'Surface Parcel';
     }
     let intlData: any = {
       shipment_id: shipmentId,
@@ -1735,10 +1889,10 @@ export class ParcelDetailFormComponent
       this.isParcel = true;
       // this.parcelAbroadForm.get('category')?.setValue('Parcel');
       // this.parcelAbroadForm.controls['category_details'].setValidators([
-        //   Validators.required,
+      //   Validators.required,
       // ]);
       // if(!this.isEditOrder) {
-        //   this.parcelAbroadForm.controls['category_details'].setValue('');
+      //   this.parcelAbroadForm.controls['category_details'].setValue('');
       // }
     } else {
       this.isParcel = false;
@@ -1746,7 +1900,7 @@ export class ParcelDetailFormComponent
         Validators.required,
       ]);
       this.category_item = '';
-      if(!this.isEditOrder) {
+      if (!this.isEditOrder) {
         this.parcelAbroadForm.get('category')?.setValue('');
         // this.parcelAbroadForm.controls['category_details'].setValidators(null);
         this.parcelAbroadForm.controls['category_details'].setValue('');
@@ -1767,8 +1921,8 @@ export class ParcelDetailFormComponent
   }
   childShipmentData(data: IMpsChildShipmentFormGroup[]) {
     const results = data.map((response: any) => {
-      const baseObject:any = {
-        category: "MPS",
+      const baseObject: any = {
+        category: 'MPS',
         width: parseFloat(response.child_width),
         height: parseFloat(response.child_height),
         length: parseFloat(response.child_length),
@@ -1776,12 +1930,12 @@ export class ParcelDetailFormComponent
         description: response.child_description,
         sum_insured: parseFloat(response.child_sumInsured),
         is_insured: response.child_isInsurance,
-        sender_ref: this.mpsDetailsForm.controls['sender_ref'].getRawValue()
+        sender_ref: this.mpsDetailsForm.controls['sender_ref'].getRawValue(),
       };
       // Conditionally add more data based on the isEditOrder flag
       if (this.isEditOrder) {
-        baseObject.child_shipment_id =  response.child_shipment_id;
-        baseObject.deleted =  response.deleted;
+        baseObject.child_shipment_id = response.child_shipment_id;
+        baseObject.deleted = response.deleted;
       }
       return baseObject;
     });
@@ -1790,7 +1944,7 @@ export class ParcelDetailFormComponent
   setChildShipmentData(data: any) {
     const results = data.map((response: any) => ({
       child_shipment_id: response.id,
-      deleted : false,
+      deleted: false,
       child_width: parseFloat(response.width),
       child_height: parseFloat(response.height),
       child_length: parseFloat(response.length),
@@ -1800,7 +1954,7 @@ export class ParcelDetailFormComponent
       child_description: response.description,
       child_premAmt: parseFloat(response.insured_premium),
       child_sumInsured: parseFloat(response.sum_insured),
-      child_isInsurance: response.child_isInsurance === false ? false : true
+      child_isInsurance: response.child_isInsurance === false ? false : true,
     }));
     return results;
   }
@@ -1814,34 +1968,40 @@ export class ParcelDetailFormComponent
   }
   getSuspendedCountryList() {
     this.commonService.getCurrentRecipientData$.subscribe((val) => {
-      if(val?.recipient?.country !== undefined) {
-        if(val?.recipient && val?.recipient?.country !== 'MY') {
+      if (val?.recipient?.country !== undefined) {
+        if (val?.recipient && val?.recipient?.country !== 'MY') {
           this.commonService
-          .getAPI('products', `query?country=${val?.recipient?.country}`, 0)
-          .pipe(
-            takeUntil(this._onDestroy),
-            tap((response: any) => {
-
-              this.disabledProducts = response.data.map((product: IProductDisable) => product.product);
-              if(!this.isEditOrder) {
-                if (this.disabledProducts) this.parcelAbroadForm.controls['product']?.setValue('')
-              }
-              this.updateChargeableWeight();
-              this.cdr.detectChanges();
-            }),
-            catchError((err) => {
-              this.openSnackBar(err?.message ?? this.languageData.product_list_fail_note,'Okay', 2000)
-              this.goBack(0);
-              return EMPTY
-            }),
-          )
-          .subscribe();
+            .getAPI('products', `query?country=${val?.recipient?.country}`, 0)
+            .pipe(
+              takeUntil(this._onDestroy),
+              tap((response: any) => {
+                this.disabledProducts = response.data.map(
+                  (product: IProductDisable) => product.product
+                );
+                if (!this.isEditOrder) {
+                  if (this.disabledProducts)
+                    this.parcelAbroadForm.controls['product']?.setValue('');
+                }
+                this.updateChargeableWeight();
+                this.cdr.detectChanges();
+              }),
+              catchError((err) => {
+                this.openSnackBar(
+                  err?.message ?? this.languageData.product_list_fail_note,
+                  'Okay',
+                  2000
+                );
+                this.goBack(0);
+                return EMPTY;
+              })
+            )
+            .subscribe();
         }
       }
     });
   }
-  openSnackBar(message: string, action: string, time: number){
-    this._snackBar.open(message, action, {duration: time})
+  openSnackBar(message: string, action: string, time: number) {
+    this._snackBar.open(message, action, { duration: time });
   }
 
   // SPPI-2323 : Suspend/Block Countries for EMS, Air Parcel & Surface Parcel
@@ -1861,16 +2021,25 @@ export class ParcelDetailFormComponent
     return this.disabledProducts.includes(apiProductName);
   }
 
-  showCOD(){
+  showCOD() {
     return this.is_cod && !this.isReturnOrder && !this.isMelPlus && !this.isMPS;
   }
-  goBack(index: number){
+  goBack(index: number) {
     this.stepper.selectedIndex = index;
   }
 
-  canImplementNewRatePremiumAmt(){
-    const form = this.isCountryMY ? this.parcelDetailsForm : this.parcelAbroadForm;
-    return form.get('category')?.value?.toLowerCase() !== 'ubat' && form.get('category')?.value?.toLowerCase() !== 'melplus';
+  canImplementNewRatePremiumAmt() {
+    const form = this.isCountryMY
+      ? this.parcelDetailsForm
+      : this.parcelAbroadForm;
+    return (
+      form.get('category')?.value?.toLowerCase() !== 'ubat' &&
+      form.get('category')?.value?.toLowerCase() !== 'melplus'
+    );
   }
 
+  showMobileTooltip(tooltip: MatTooltip) {
+    tooltip.show();
+    setTimeout(() => tooltip.hide(), 3000);
+  }
 }

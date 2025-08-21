@@ -288,7 +288,7 @@ td.mat-cell:last-of-type {
   // padding: 0px 30px;
   font-weight: 400 !important;
 
-  flex: 1 1 auto; /* Grow and shrink based on available space */
+  // flex: 1 1 auto; /* Grow and shrink based on available space */
   min-width: 120px; /* Minimum width for the buttons */
   // padding: 6px 16px; /* Adjust padding to control button height (uniform vertical padding) */
   font-size: 14px;
@@ -415,7 +415,7 @@ table td:nth-child(2) {
     padding-right: 10px; /* Ensure padding-right on mobile */
   }
   .button-container button {
-    flex: 1 1 45%; /* Allow buttons to take up 45% of the width */
+    // flex: 1 1 45%; /* Allow buttons to take up 45% of the width */
     font-size: 14px; /* Adjust font size as needed */
     line-height: 36px; /* Maintain consistent line height */
   }

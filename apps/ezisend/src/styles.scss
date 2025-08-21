@@ -359,3 +359,16 @@ div#mat-menu-panel-0 {
     padding: 0 !important;
   }
 }
+
+.user-menu-items .mat-menu-content {
+  display: flex;
+  flex-direction: column;
+  .mat-menu-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    .mat-icon {
+      margin-right: 0 !important;
+    }
+  }
+}

@@ -429,6 +429,9 @@
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
+  border: 1px solid #ccc;
+  border-collapse: separate;   
+  border-spacing: 0;            
 }
 
 .custom-table thead th {

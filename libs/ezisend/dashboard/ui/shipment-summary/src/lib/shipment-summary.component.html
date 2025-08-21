@@ -65,7 +65,9 @@
             </ng-container>
           </div>
           <div class="column cod">
-            <div class="payment-method">{{data.dashboard.insights.payment_method}}</div>
+            <div class="payment-method">
+              {{ data.dashboard.insights.payment_method }}
+            </div>
 
             <!-- Chart Content -->
             <div
@@ -91,14 +93,14 @@
                 >
                 </canvas>
                 <div class="no-data" *ngIf="isEmptyDoughnutChart">
-                  {{data.dashboard.insights.no_data}}
+                  {{ data.dashboard.insights.no_data }}
                 </div>
                 <div class="no-data table" *ngIf="isEmptyDoughnutChart">
-                  <p>{{data.dashboard.insights.unvailable}}</p>
+                  <p>{{ data.dashboard.insights.unvailable }}</p>
                 </div>
               </div>
               <div class="table-section" *ngIf="!isEmptyDoughnutChart">
-                <table class="custom-table">
+                <table class="custom-table payment-summery-table">
                   <thead>
                     <tr>
                       <th>{{ data.dashboard.insights.delivery_type }}</th>
@@ -117,7 +119,8 @@
                                 width: '20px',
                                 height: '20px',
                                 borderRadius: '5px',
-                                marginRight: '5px'
+                                marginRight: '5px',
+                                flexShrink: '0'
                               }"
                             ></div>
                             {{ element.name }}

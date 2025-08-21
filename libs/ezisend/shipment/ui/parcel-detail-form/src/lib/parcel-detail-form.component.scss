@@ -710,6 +710,19 @@
   .insurance-label {
     height: 1.5rem;
   }
+  .insurance-notes {
+    padding: 5px 0 5px 15px;
+    border-left: 5px solid #00498d;
+    border-radius: 10px;
+    margin: 15px 0;
+    p {
+      text-align: justify !important;
+    }
+  }
+  ul.insurance_notes {
+    margin-bottom: 0;
+    padding-left: 20px;
+  }
 }
 
 @media screen and (max-width: 435px) {
@@ -735,7 +748,7 @@
     margin: 0.25em 0 !important;
   }
   .insurance-check {
-    margin: 0.25em 0 30px !important;
+    margin: 0.25em 0 20px !important;
   }
   .insurance-notes {
     // margin: 0 16px;

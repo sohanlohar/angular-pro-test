@@ -202,10 +202,10 @@
   .address {
     margin-bottom: 18px;
   }
-  .disclaimer {
-    padding-left: 17px;
-    top: 0px;
-  }
+  // .disclaimer {
+  //   padding-left: 17px;
+  //   top: 0px;
+  // }
   .recipient-container {
     .form-group {
       display: flex;
@@ -257,18 +257,18 @@
       '. save-contacts . button-next' !important;
   }
 
-  .disclaimer {
-    text-align: center;
-    padding-top: 8px;
-  }
+  // .disclaimer {
+  //   text-align: center;
+  //   padding-top: 8px;
+  // }
 }
 
 @media (min-width: 320px) and (max-width: 567px) {
-  .disclaimer {
-    text-align: center;
-    padding-left: 0px;
-    top: 0px;
-  }
+  // .disclaimer {
+  //   text-align: center;
+  //   padding-left: 0px;
+  //   top: 0px;
+  // }
 }
 
 .mat-form-field input {
