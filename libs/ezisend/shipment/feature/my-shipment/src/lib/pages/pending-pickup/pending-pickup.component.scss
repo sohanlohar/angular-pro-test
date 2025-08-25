@@ -126,7 +126,7 @@ mat-form-field {
   .actions {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 20px;
   }
   .mobile-filter-overlay .mobile-filter-popup {
     padding: 15px !important;
@@ -162,6 +162,9 @@ mat-form-field {
     max-height: 80vh;
     // overflow-y: auto;
     animation: fadeIn 0.2s ease-out;
+    h3 {
+      margin-bottom: 0 !important;
+    }
   }
 }
 

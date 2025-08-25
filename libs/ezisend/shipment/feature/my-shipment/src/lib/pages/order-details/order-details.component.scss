@@ -58,6 +58,7 @@
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
+    width: 100%;
     .tracking-inner {
       display: flex;
       flex-direction: column;
@@ -224,7 +225,7 @@
   .track-order-button-container {
     max-width: 220px;
     width: 100%;
-
+    gap: 10px;
     > a {
       width: 100%;
     }
@@ -597,6 +598,11 @@
 @media screen and(max-width:430px) {
   .track-list-holder .track-section-day .track-date {
     min-width: 8.2rem;
+  }
+  .track-order-button-container {
+    .convert-to-non-cod {
+      flex: 1;
+    }
   }
 }
 

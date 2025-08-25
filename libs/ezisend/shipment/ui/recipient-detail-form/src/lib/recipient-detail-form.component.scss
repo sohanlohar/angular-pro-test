@@ -13,9 +13,9 @@
   // }
 
   .form-group {
-    width: 100%;
+    // width: 100%;
     display: grid;
-    grid-template-columns: 24% 23% 23% 23%;
+    // grid-template-columns: 24% 23% 23% 23%;
     grid-template-areas:
       'search search . .'
       'smart-input smart-input . .'
@@ -24,11 +24,14 @@
       'address address address address'
       'disclaimer disclaimer disclaimer disclaimer'
       'country postcode state city'
-      '. . save-contacts button-next';
+      'save-contacts save-contacts save-contacts button-next';
 
     // grid-template-columns: repeat(1, auto);
-    gap: 0.1rem 1rem;
-    margin-bottom: 1.25rem;
+    // gap: 0.1rem 1rem;
+    // margin-bottom: 1.25rem;
+    column-gap: 20px;
+    align-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
     .address {
       textarea {
@@ -40,29 +43,35 @@
     }
 
     .save-contacts {
-      text-align: right;
-      margin-top: 25px;
+      text-align: left;
+      // margin-top: 25px;
     }
 
     .save_contact_label {
       color: #5e5873;
       line-height: 8px;
     }
+    .mat-form-field,
+    .mat-expansion-panel-header,
+    .mat-form-field.mat-form-field-type-mat-select {
+      width: 100%;
+    }
   }
 
   .edit-order-template {
     grid-template-columns: 100%;
     grid-template-areas:
-      'search'
-      'recipient-name'
-      'company-name'
-      'tel'
-      'address'
-      'email'
-      'country'
-      'postcode'
-      'state'
-      'city';
+      'search search . .'
+      'smart-input smart-input . .'
+      'recipient-name recipient-name company-name company-name'
+      'tel tel email email'
+      'address address address address'
+      'disclaimer disclaimer disclaimer disclaimer'
+      'country postcode state city'
+      '. save-contacts save-contacts button-next';
+    column-gap: 20px;
+    align-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -74,6 +83,7 @@
 
 .smart-input {
   grid-area: smart-input;
+  width: 100%;
 }
 
 .recipient-name {
@@ -85,6 +95,9 @@
 
 .tel {
   grid-area: tel;
+}
+div.tel {
+  width: 100%;
 }
 
 .email {
@@ -118,6 +131,7 @@
 }
 .country {
   grid-area: country;
+  width: 100%;
 }
 
 .save-contacts {
@@ -130,20 +144,20 @@
 }
 
 @media screen and (min-width: 40rem) {
-  .form-group {
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  }
+  // .form-group {
+  //   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  // }
 
-  .recipient-container > .edit-order-template {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-areas:
-      'search search . .'
-      'recipient-name recipient-name company-name company-name'
-      'tel tel email email'
-      'address address address address'
-      'disclaimer disclaimer disclaimer disclaimer'
-      'country postcode state city';
-  }
+  // .recipient-container > .edit-order-template {
+  //   grid-template-columns: repeat(4, minmax(0, 1fr));
+  //   grid-template-areas:
+  //     'search search'
+  //     'recipient-name recipient-name company-name company-name'
+  //     'tel tel email email'
+  //     'address address address address'
+  //     'disclaimer disclaimer disclaimer disclaimer'
+  //     'country postcode state city';
+  // }
 }
 
 ::ng-deep .address-autocomplete {
@@ -180,7 +194,7 @@
       .contact-address {
         white-space: normal;
         margin: 1rem 0rem;
-        span{
+        span {
           margin-left: 0;
         }
       }
@@ -190,30 +204,49 @@
     }
   }
 }
-@media screen and (max-width: 767px) {
+
+@media screen and (max-width: 768px) {
   .recipient-container {
     padding: 0 1rem;
-  }
-}
-@media screen and (max-width: 668px) {
-  .recipient-name {
-    margin-top: 1em;
+    .form-group {
+      display: grid;
+      grid-template-areas:
+        'search search'
+        'smart-input smart-input'
+        'recipient-name company-name'
+        'tel tel'
+        'email email'
+        'address address'
+        'disclaimer disclaimer'
+        'country postcode'
+        'state city'
+        'save-contacts button-next';
+      column-gap: 10px;
+      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .edit-order-template {
+      display: grid;
+      grid-template-areas:
+        'search search'
+        'smart-input smart-input'
+        'recipient-name company-name'
+        'tel tel'
+        'email email'
+        'address address'
+        'disclaimer disclaimer'
+        'country postcode'
+        'state city'
+        'save-contacts button-next';
+      column-gap: 10px;
+      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   .address {
     margin-bottom: 18px;
   }
-  // .disclaimer {
-  //   padding-left: 17px;
-  //   top: 0px;
-  // }
-  .recipient-container {
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      height: 500px;
-      overflow: auto;
-    }
-  }
+
   .button-next {
     position: sticky;
     margin-left: 4%;
@@ -226,9 +259,37 @@
   }
 }
 
+// @media screen and (max-width: 670px) {
+//   .recipient-container {
+//     .form-group {
+//       display: grid;
+//       grid-template-areas:
+//         'search'
+//         'smart-input'
+//         'recipient-name'
+//         'company-name'
+//         'tel'
+//         'email'
+//         'address'
+//         'disclaimer'
+//         'country'
+//         'postcode'
+//         'state'
+//         'city'
+//         'save-contacts'
+//         'button-next';
+//       column-gap: 10px;
+//       row-gap: 10px;
+//       align-items: center;
+//       grid-template-columns: repeat(1, minmax(0, 1fr));
+//     }
+//   }
+// }
+
 .button-next button {
   width: 100%;
   cursor: pointer !important;
+  margin-bottom: 30px !important;
 }
 
 ::ng-deep .mat-option.mat-active {
@@ -245,31 +306,59 @@
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  :host ::ng-deep .form-group {
-    grid-template-areas:
-      'search search . .'
-      'smart-input smart-input . .'
-      'recipient-name recipient-name company-name company-name'
-      'tel tel email email'
-      'address address address address'
-      'disclaimer disclaimer disclaimer disclaimer'
-      'country postcode state city'
-      '. save-contacts . button-next' !important;
+  .recipient-container {
+    .title {
+      padding: 0 1rem;
+    }
+    .form-group {
+      grid-template-areas:
+        'search search . .'
+        'smart-input smart-input . .'
+        'recipient-name recipient-name company-name company-name'
+        'tel tel tel tel'
+        'email email email email'
+        'address address address address'
+        'disclaimer disclaimer disclaimer disclaimer'
+        'country country state state'
+        'postcode postcode city city'
+        'save-contacts save-contacts save-contacts button-next' !important;
+      column-gap: 10px;
+      align-items: center;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .edit-order-template {
+      display: grid;
+      grid-template-areas:
+        'search search search .'
+        'smart-input smart-input smart-input .'
+        'recipient-name recipient-name company-name company-name'
+        'tel tel tel tel'
+        'email email email email'
+        'address address address address'
+        'disclaimer disclaimer disclaimer disclaimer'
+        'country country state state'
+        'postcode postcode city city'
+        '. save-contacts save-contacts button-next' !important;
+      column-gap: 10px;
+      align-items: center;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 0 1rem;
+    }
+
+    .disclaimer {
+      // text-align: center;
+      padding-top: 8px;
+    }
   }
-
-  // .disclaimer {
-  //   text-align: center;
-  //   padding-top: 8px;
-  // }
 }
 
-@media (min-width: 320px) and (max-width: 567px) {
-  // .disclaimer {
-  //   text-align: center;
-  //   padding-left: 0px;
-  //   top: 0px;
-  // }
-}
+// @media (min-width: 320px) and (max-width: 567px) {
+//   .disclaimer {
+//     // text-align: center;
+//     padding-left: 0px;
+//     top: 0px;
+//   }
+// }
 
 .mat-form-field input {
   white-space: nowrap;

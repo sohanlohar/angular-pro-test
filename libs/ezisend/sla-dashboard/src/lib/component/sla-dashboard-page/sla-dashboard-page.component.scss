@@ -1309,11 +1309,11 @@ a.download-report-button {
       justify-content: space-between;
 
       .date-picker-container {
-        gap: 0.5rem !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        flex-direction: column;
-        width: 100%;
+        // gap: 0.5rem !important;
+        // align-items: flex-start !important;
+        // justify-content: flex-start !important;
+        // flex-direction: column;
+        // width: 100%;
         .date-picker-form {
           width: 100% !important;
         }
@@ -1383,6 +1383,20 @@ a.download-report-button {
     height: 200px !important;
     min-height: 200px !important;
     font-size: 14px !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header-sla {
+    .header-filter {
+      .date-picker-container {
+        gap: 0.5rem !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        flex-direction: column;
+        width: 100%;
+      }
+    }
   }
 }
 

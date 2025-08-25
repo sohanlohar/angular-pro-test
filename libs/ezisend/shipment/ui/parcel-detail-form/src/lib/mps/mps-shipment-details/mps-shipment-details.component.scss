@@ -16,24 +16,27 @@
   .form-group-my {
     width: 100%;
     display: grid;
-    grid-template-columns: 15% 15% 15% 15% 15% 15%;
+    // grid-template-columns: 15% 15% 15% 15% 15% 15%;
     grid-auto-flow: column;
     gap: 1rem;
     row-gap: 0.1rem;
     grid-template-areas:
-      'tW tW tH tH tpa tpa'
-      'pS pS pS . . .'
-      'dWe dWe dWe dWi dL dH '
-      'vW vW vW . . .'
-      'dC dC dC sRn sRn sRn'
-      'cL cL cC cC . .'
-      'aM aM . . . .'
-      'iL iL iC iC . .'
-      'iN iN iN iN iN iN'
-      'SI SI pM pM . .'
-      'deL deL deL deL deL deL'
-      'cuF cuF cuF cuF cuF cuF'
-      'pB pB pB sB sB sB';
+      'tW tH tpa'
+      'pS pS pS'
+      'dWe dWi dL'
+      'dH vW vW'
+      'dC dC sRn'
+      'cL cL cC'
+      'aM aM aM'
+      'iL iL iL'
+      'iC iC iC'
+      'iN iN iN'
+      'SI SI pM'
+      'deL deL deL'
+      'cuF cuF cuF'
+      'pB pB sB';
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 10px;
 
     .button-previous {
       margin: 1rem 0rem 1rem 0rem;
@@ -204,7 +207,8 @@
 
   .insurance-label {
     grid-area: iL;
-    height: 2.5rem;
+    // height: 2.5rem;
+    margin-bottom: 10px;
 
     mat-label {
       font-weight: v.$font-weight-medium;
@@ -229,6 +233,9 @@
     grid-area: iN;
     .importantText {
       color: red;
+    }
+    p {
+      text-align: justify;
     }
   }
 
@@ -388,6 +395,7 @@
   }
 }
 .insurance_notes {
+  padding-left: 20px;
   .info_style {
     height: 18px;
     width: 18px;
@@ -399,7 +407,7 @@
   min-width: 40vw;
   display: block !important;
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   .mps-shipment-container .form-group-my {
     display: flex;
     flex-direction: column;
@@ -470,12 +478,12 @@
 }
 
 /* Checkbox + volumetric weight input row */
-.row-volume {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 8px;
-}
+// .row-volume {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 16px;
+//   margin-top: 8px;
+// }
 .checkbox-inline {
   align-self: center;
   flex: 1.3 1 0;

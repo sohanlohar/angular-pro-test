@@ -136,52 +136,52 @@
     }
   }
 
-  .edit-order-template-my {
-    grid-template-areas:
-      'cA'
-      'dW'
-      'dL'
-      'dH'
-      'dWe'
-      'vW'
-      'cW'
-      'wM'
-      'dC'
-      'pN'
-      'cL'
-      'cC'
-      'aM'
-      'iL'
-      'iC'
-      'iN'
-      'SI'
-      'pM'
-      'sB';
-  }
+  // .edit-order-template-my {
+  //   grid-template-areas:
+  //     'cA'
+  //     'dW'
+  //     'dL'
+  //     'dH'
+  //     'dWe'
+  //     'vW'
+  //     'cW'
+  //     'wM'
+  //     'dC'
+  //     'pN'
+  //     'cL'
+  //     'cC'
+  //     'aM'
+  //     'iL'
+  //     'iC'
+  //     'iN'
+  //     'SI'
+  //     'pM'
+  //     'sB';
+  // }
 
   .form-group {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-auto-flow: column;
-    gap: 1rem;
-    row-gap: 0.1rem;
-    grid-template-areas:
-      'pT'
-      'dW'
-      'dL'
-      'dH'
-      'dWe'
-      'vW'
-      'cW'
-      'wM'
-      'dC'
-      'sR'
-      'rR'
-      'cD'
-      'cE'
-      'pB'
-      'sB';
+    //   width: 100%;
+    //   display: grid;
+    //   grid-template-columns: 100%;
+    //   grid-auto-flow: column;
+    //   gap: 1rem;
+    //   row-gap: 0.1rem;
+    //   grid-template-areas:
+    //     'pT'
+    //     'dW'
+    //     'dL'
+    //     'dH'
+    //     'dWe'
+    //     'vW'
+    //     'cW'
+    //     'wM'
+    //     'dC'
+    //     'sR'
+    //     'rR'
+    //     'cD'
+    //     'cE'
+    //     'pB'
+    //     'sB';
 
     .button-previous {
       margin: 1rem 0rem 0rem 0rem;
@@ -212,7 +212,7 @@
         grid-template-columns: 1fr;
         grid-auto-flow: column;
         gap: 1rem;
-        padding: 1rem 0 0 0;
+        padding: 1rem;
         row-gap: 0.1rem;
         grid-template-areas:
           'paT'
@@ -243,28 +243,29 @@
     }
   }
 
-  .edit-order-template {
-    grid-template-areas:
-      'pR'
-      'cA'
-      'cD'
-      'dW'
-      'dL'
-      'dH'
-      'dWe'
-      'vW'
-      'cW'
-      'pN'
-      'iL'
-      'iN'
-      'SI'
-      'pM'
-      'deL'
-      'cuF'
-      'pB'
-      'sB';
-  }
+  // .edit-order-template {
+  //   grid-template-areas:
+  //     'pR'
+  //     'cA'
+  //     'cD'
+  //     'dW'
+  //     'dL'
+  //     'dH'
+  //     'dWe'
+  //     'vW'
+  //     'cW'
+  //     'pN'
+  //     'iL'
+  //     'iN'
+  //     'SI'
+  //     'pM'
+  //     'deL'
+  //     'cuF'
+  //     'pB'
+  //     'sB';
+  // }
   .insurance_notes {
+    padding-left: 20px;
     .info_style {
       height: 18px;
       width: 18px;
@@ -277,182 +278,251 @@
     display: block !important;
   }
 
-  @media screen and (min-width: 40rem) {
-    .form-group {
-      width: 100%;
+  // @media screen and (min-width: 40rem) {
+  .form-group {
+    // width: 100%;
+    display: grid;
+    // grid-template-columns: 15% 15% 15% 15% 15% 15% 15%;
+    // grid-auto-flow: column;
+    // gap: 1rem;
+    // row-gap: 0.1rem;
+    grid-template-areas:
+      'pR pR cA cA cD cD'
+      'dW dL dH dWe vW cW'
+      'sRn sRn sRn sRn sRn sRn'
+      'pN pN pN pN pN pN'
+      'iL iL iL iL iL iL'
+      'iC iC iC iC iC iC'
+      'iN iN iN iN iN iN'
+      'SI SI pM pM . .'
+      'deL deL deL deL deL deL'
+      'cuF cuF cuF cuF cuF cuF'
+      'pB pB pB sB sB sB';
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 10px;
+
+    .button-previous {
+      margin: 1rem 0rem 1rem 0rem;
+      grid-area: pB;
+      justify-items: left;
       display: grid;
-      grid-template-columns: 15% 15% 15% 15% 15% 15% 15%;
-      grid-auto-flow: column;
-      gap: 1rem;
-      row-gap: 0.1rem;
-      grid-template-areas:
-        'pR pR cA cA cD cD'
-        'dW dL dH dWe vW cW'
-        'sRn sRn sRn sRn sRn sRn'
-        'pN pN pN pN pN pN'
-        'iL iL iC iC iC .'
-        'iN iN iN iN iN iN'
-        'SI SI pM pM . .'
-        'deL deL . . . .'
-        'cuF cuF cuF cuF cuF cuF'
-        'pB pB pB sB sB sB';
 
-      .button-previous {
-        margin: 1rem 0rem 1rem 0rem;
-        grid-area: pB;
-        justify-items: left;
+      button {
+        justify-self: left;
+        width: 7rem;
+        height: 2.9rem;
+      }
+    }
+
+    .button-submit {
+      margin: 1rem 0rem 1rem 0rem;
+      grid-area: sB;
+      justify-items: right;
+      display: grid;
+
+      button {
+        justify-self: right;
+        min-width: 7rem;
+        height: 2.9rem;
+      }
+    }
+
+    .customs_form {
+      .customs_container {
+        width: 100%;
         display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) 90px;
+        grid-auto-flow: column;
+        gap: 0rem;
+        row-gap: 0.1rem;
+        grid-template-areas:
+          'paT paT cuDe cuDe deCu'
+          'cuWe cuQu cuVa cuCo deCu';
 
-        button {
-          justify-self: left;
-          width: 7rem;
-          height: 2.9rem;
+        // .mat-form-field,
+        // pos-country-select {
+        //   padding-left: 1rem;
+        // }
+
+        .delete_custom {
+          align-items: flex-end;
+          // padding-bottom: 0.5rem;
+          place-items: center;
         }
       }
-
-      .button-submit {
-        margin: 1rem 0rem 1rem 0rem;
-        grid-area: sB;
-        justify-items: right;
+    }
+    .customs_form {
+      .customs_container {
+        width: 100%;
         display: grid;
-
-        button {
-          justify-self: right;
-          min-width: 7rem;
-          height: 2.9rem;
+        gap: 1rem;
+        box-sizing: border-box;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-areas:
+          'paT paT cuDe cuDe'
+          'cuWe cuQu cuVa cuCo'
+          'deCu deCu deCu deCu';
+        row-gap: 0;
+        .parcel_type {
+          grid-area: paT;
         }
-      }
+        .description {
+          grid-area: cuDe;
+        }
+        .weight {
+          grid-area: cuWe;
+        }
+        .quantity {
+          grid-area: cuQu;
+        }
+        .value {
+          grid-area: cuVa;
+        }
+        .country {
+          grid-area: cuCo;
+        }
 
-      .customs_form {
-        .customs_container {
-          width: 100%;
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          grid-auto-flow: column;
-          gap: 0rem;
-          row-gap: 0.1rem;
+        .delete_custom {
+          grid-area: deCu;
+          justify-self: end;
+          // margin-top: 0.5rem;
+        }
+
+        /* Tablet: 2 columns */
+        @media (max-width: 992px) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           grid-template-areas:
-            'paT paT cuDe cuDe'
-            'cuWe cuQu cuVa cuCo'
-            '. . . deCu';
-
-          .mat-form-field,
-          pos-country-select {
-            padding-left: 1rem;
-          }
-
-          .delete_custom {
-            align-items: flex-end;
-            padding-bottom: 0.5rem;
-          }
-        }
-      }
-      button {
-        mat-spinner {
-          margin: 0 auto;
+            'paT cuDe'
+            'cuWe cuQu'
+            'cuVa cuCo'
+            'deCu deCu';
         }
 
-        .login-loading-spinner {
-          ::ng-deep circle {
-            stroke: white;
-          }
+        /* Mobile: 1 column */
+        @media (max-width: 576px) {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            'paT'
+            'cuDe'
+            'cuWe'
+            'cuQu'
+            'cuVa'
+            'cuCo'
+            'deCu';
         }
       }
     }
 
-    .form-group-my {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(13, 1fr);
-      gap: 1rem;
-      row-gap: 0.1rem;
-      grid-template-areas:
-        '. . . . . . . dG dG dG dG dG dG'
-        'cA cA cA cA dW dW dW dL dL dL dH dH dH'
-        'dWe dWe dWe dWe vW vW vW cW cW cW . . .'
-        'mps mps mps mps mps mps mps mps mps mps mps mps mps'
-        'wM wM wM wM wM wM wM wM wM wM wM wM wM '
-        'dC dC dC dC dC dC dC sRn sRn sRn sRn sRn sRn'
-        // "sRn sRn sRn sRn sRn sRn sRn "
-        'pN pN pN pN pN pN pN pN pN pN pN pN pN'
-        'cL cL cL cL cC cC cC cC cC cC . . .'
-        'aM aM aM aM . . . . . . . . .'
-        'iL iL iL iL iC iC iC iC iC iC . . .'
-        'iN iN iN iN iN iN iN iN iN iN iN iN iN'
-        'SI SI SI SI pM pM pM pM pM pM . . .'
-        'pB pB pB pB sB sB sB sB sB sB sB sB sB';
-
-      .button-previous {
-        margin: 1rem 0rem 1rem 0rem;
-        grid-area: pB;
-        justify-items: left;
-        display: grid;
-
-        button {
-          justify-self: left;
-          width: 7rem;
-          height: 2.9rem;
-        }
+    button {
+      mat-spinner {
+        margin: 0 auto;
       }
 
-      .button-submit {
-        margin: 1rem 0rem 1rem 0rem;
-        grid-area: sB;
-        justify-items: right;
-        display: grid;
-
-        button {
-          justify-self: right;
-          min-width: 12rem;
-          height: 2.9rem;
-          cursor: pointer;
+      .login-loading-spinner {
+        ::ng-deep circle {
+          stroke: white;
         }
       }
-      button {
-        mat-spinner {
-          margin: 0 auto;
-        }
-
-        .login-loading-spinner {
-          ::ng-deep circle {
-            stroke: white;
-          }
-        }
-      }
-    }
-
-    .edit-order-template {
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      grid-template-areas:
-        'cA cA cA . . .'
-        'dW dL dH dWe vW vW cW cW'
-        'wM wM wM wM wM wM'
-        'dC dC dC dC dC dC'
-        'pN pN pN sRn sRn sRn'
-        'cL cL cC cC . .'
-        'aM aM . . . .'
-        'iL iL iC iC . .'
-        'iN iN iN iN iN iN'
-        'SI SI pM pM . .'
-        '. . . sB sB sB';
-    }
-
-    .edit-order-template-my {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      grid-template-areas:
-        'cA cA cA . . .'
-        'dW dL dH dWe vW vW cW cW'
-        'wM wM wM wM wM wM'
-        'dC dC dC dC dC dC'
-        'pN pN pN sRn sRn sRn'
-        'cL cL cC cC . .'
-        'aM aM . . . .'
-        'iL iL iC iC . .'
-        'iN iN iN iN iN iN'
-        'SI SI pM pM . .'
-        '. . . sB sB sB';
     }
   }
+
+  .form-group-my {
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+      '. . . dG'
+      'cA dW dL dH'
+      'dWe vW cW .'
+      'mps mps mps mps'
+      'wM wM wM wM'
+      'dC dC sRn sRn'
+      'pN pN pN pN'
+      'cL cL cL cL'
+      'cC cC cC cC'
+      'aM aM aM aM'
+      'iL iL iL iL'
+      'iC iC iC iC'
+      'iN iN iN iN'
+      'SI SI pM pM'
+      'pB pB sB sB';
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 10px;
+
+    .button-previous {
+      margin: 1rem 0rem 1rem 0rem;
+      grid-area: pB;
+      justify-items: left;
+      display: grid;
+
+      button {
+        justify-self: left;
+        width: 7rem;
+        height: 2.9rem;
+      }
+    }
+
+    .button-submit {
+      margin: 1rem 0rem 1rem 0rem;
+      grid-area: sB;
+      justify-items: right;
+      display: grid;
+
+      button {
+        justify-self: right;
+        min-width: 12rem;
+        height: 2.9rem;
+        cursor: pointer;
+      }
+    }
+    button {
+      mat-spinner {
+        margin: 0 auto;
+      }
+
+      .login-loading-spinner {
+        ::ng-deep circle {
+          stroke: white;
+        }
+      }
+    }
+  }
+
+  // .edit-order-template {
+  //   grid-template-columns: repeat(6, minmax(0, 1fr));
+  //   grid-template-areas:
+  //     'cA cA cA . . .'
+  //     'dW dL dH dWe vW vW cW cW'
+  //     'wM wM wM wM wM wM'
+  //     'dC dC dC dC dC dC'
+  //     'pN pN pN sRn sRn sRn'
+  //     'cL cL cC cC . .'
+  //     'aM aM . . . .'
+  //     'iL iL iC iC . .'
+  //     'iN iN iN iN iN iN'
+  //     'SI SI pM pM . .'
+  //     '. . . sB sB sB';
+  // }
+
+  // .edit-order-template-my {
+  //   display: grid;
+  //   grid-template-areas:
+  //     'cA dW dL dH'
+  //     'dWe vW cW dC'
+  //     'wM wM wM wM'
+  //     'dC dC dC dC'
+  //     'pN pN pN sRn'
+  //     'cL cL cC cC'
+  //     'aM aM aM aM'
+  //     'iL iL iC iC'
+  //     'iN iN iN iN'
+  //     'SI SI pM pM'
+  //     'sB sB sB sB';
+  //   grid-template-columns: repeat(4, 1fr);
+  //   column-gap: 20px;
+  //   row-gap: 15px;
+  //   align-items: center;
+  // }
+  // }
 }
 .dimensionGuide {
   font-size: 0.8rem;
@@ -520,7 +590,8 @@
 
 .cod-label {
   grid-area: cL;
-  height: 2.5rem;
+  // height: 2.5rem;
+  margin-bottom: 10px;
 
   mat-label {
     font-weight: v.$font-weight-medium;
@@ -529,6 +600,7 @@
 
 .cod-check {
   grid-area: cC;
+  margin-bottom: 10px;
 }
 
 .amount {
@@ -537,7 +609,8 @@
 
 .insurance-label {
   grid-area: iL;
-  height: 2.5rem;
+  // height: 2.5rem;
+  margin-bottom: 10px;
 
   mat-label {
     font-weight: v.$font-weight-medium;
@@ -546,24 +619,30 @@
 
 .declaration-label {
   grid-area: deL;
-  height: 2.5rem;
+  // height: 2.5rem;
+  margin: 0px 0 20px 0;
+  font-weight: 500;
 }
 
 .customs_form {
   grid-area: cuF;
+  .customs_container {
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    padding: 1rem !important;
+  }
 
   div {
     display: grid;
     grid-gap: 0rem 0.5rem;
     margin-bottom: 1rem;
-    // background: #f7fbff;
+    // background: #ffffff;
     border-radius: 0.5rem;
     // padding: 0 0.5rem;
 
     .delete_custom {
       grid-area: deCu;
       place-items: center;
-      align-items: flex-end;
       button {
         padding: 8px 20px;
         background-color: white;
@@ -618,7 +697,7 @@
 
 .insurance-check {
   grid-area: iC;
-
+  margin-bottom: 10px;
   ::ng-deep .mat-checkbox .mat-checkbox-inner-container {
     margin: 5px auto 0 !important;
   }
@@ -655,7 +734,7 @@
 }
 @media screen and (max-width: 760px) {
   .button-submit {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     margin-top: 10px;
     button {
       width: 100%;
@@ -687,6 +766,10 @@
     div {
       display: flex;
       flex-direction: column;
+      .delete_custom {
+        align-items: end !important;
+        justify-content: flex-end;
+      }
       .country {
         grid-area: auto;
       }
@@ -714,6 +797,37 @@
   .insurance-label {
     height: 1.5rem;
   }
+  .warning-message {
+    background-color: #edf0f9;
+    padding: 10px;
+    color: #00498d;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: inline-flex;
+    p {
+      display: flex;
+      width: fit-content;
+      gap: 5px;
+      align-items: flex-start;
+      margin-bottom: 0;
+      .mat-icon {
+        overflow: visible;
+      }
+    }
+  }
+  ul.insurance_notes {
+    li {
+      margin-bottom: 10px;
+      .mat-icon {
+        font-size: 20px;
+        vertical-align: middle;
+      }
+    }
+  }
+  // .dimensionWeight .mat-icon,
+  // .weight .mat-icon.notranslate {
+  //   display: none !important;
+  // }
   .insurance-notes {
     padding: 5px 0 5px 15px;
     border-left: 5px solid #00498d;
@@ -746,13 +860,13 @@
     margin: 0.25em 0 !important;
   }
   .cod-check {
-    margin: 0.25em 0 !important;
+    margin: 0.25em 0.25em 10px !important;
   }
   .insurance-label {
     margin: 0.25em 0 !important;
   }
   .insurance-check {
-    margin: 0.25em 0 20px !important;
+    margin: 0.25em 0 30px !important;
   }
   .insurance-notes {
     // margin: 0 16px;
@@ -816,8 +930,56 @@
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .parcel-container .form-group-my {
-    row-gap: 1rem !important;
+  // .parcel-container .form-group-my {
+  //   row-gap: 1rem !important;
+  // }
+
+  .parcel-container {
+    .form-group {
+      display: grid;
+      grid-template-areas:
+        'pR cA'
+        'cD dW'
+        'dL dH'
+        'dWe vW'
+        'cW sRn'
+        'pN pN'
+        'iL iL'
+        'iC iC'
+        'iN iN'
+        'SI pM'
+        'deL deL'
+        'cuF cuF'
+        'pB sB';
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 10px;
+    }
+    .form-group-my {
+      display: grid;
+      grid-template-areas:
+        'dG dG'
+        'cA dW'
+        'dL dH'
+        'dWe vW'
+        'cW cW'
+        'mps mps'
+        'wM wM'
+        'dC dC'
+        'sRn sRn'
+        'pN pN'
+        'cL cL'
+        'cC cC'
+        'aM aM'
+        'iL iL'
+        'iC iC'
+        'iN iN'
+        'SI SI'
+        'pM pM'
+        'pB pB'
+        'sB sB';
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 10px;
+    }
   }
 }
 
@@ -829,7 +991,7 @@
     margin-left: 0px !important;
   }
   .insurance-label {
-    padding-top: 20px !important;
+    padding-top: 10px !important;
   }
 }
 
